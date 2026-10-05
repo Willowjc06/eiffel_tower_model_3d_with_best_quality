@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Tour Mystique — The 3D Heist of the Iron Lady</title>
+  
+  <!-- Google Fonts: Elegant Serif & Display fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗼</text></svg>">
+</head>
+<body>
+
+  <!-- Scroll Progress Indicator -->
+  <div class="scroll-progress-container">
+    <div class="scroll-progress-bar" id="scroll-progress"></div>
+  </div>
+
+  <!-- Loading Screen -->
+  <div id="loader-overlay">
+    <div class="loader-crest">
+      <span class="b"></span>
+      <span class="w"></span>
+      <span class="r"></span>
+    </div>
+    
+    <svg class="loader-spire" viewBox="0 0 100 150">
+      <path class="loader-spire-path" d="M50 10 L50 25 M35 60 L65 60 M20 110 L80 110 M10 145 C 30 145, 35 120, 50 15 C 65 120, 70 145, 90 145" />
+    </svg>
+
+    <h2 class="loader-title">LA TOUR MYSTIQUE</h2>
+    <p class="loader-sub"><em>Initialisation de l'Opération Mystique</em></p>
+    
+    <div class="loader-bar-box">
+      <div class="loader-bar-fill" id="loader-fill"></div>
+    </div>
+    <div class="loader-status" id="loader-status">Forging 18,038 Puddle Iron Lattice Elements...</div>
+  </div>
+
+  <!-- Ambient Mystical Aura Background -->
+  <div class="mystical-bg-glow" id="mystical-glow"></div>
+
+  <!-- Three.js Canvas Container -->
+  <div id="webgl-container"></div>
+
+  <!-- Top Navigation Bar -->
+  <header class="navbar">
+    <div class="brand-wrapper">
+      <div class="tricolor-crest" title="République Française">
+        <span class="b"></span>
+        <span class="w"></span>
+        <span class="r"></span>
+      </div>
+      <div>
+        <span class="brand-title">La Tour Mystique</span>
+        <span class="brand-tag"><em>Édition Spéciale</em></span>
+      </div>
+    </div>
+
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#hero-section" class="active">Overview</a></li>
+        <li><a href="#feature-shape">Silhouette</a></li>
+        <li><a href="#feature-height">The Summit</a></li>
+        <li><a href="#feature-material">Iron Realism</a></li>
+        <li><a href="#heist-briefing">The Masterplan</a></li>
+        <li><a href="#heist-arena">The Heist</a></li>
+        <li><a href="#finale-section">Restoration</a></li>
+      </ul>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="btn-icon" id="btn-toggle-sound" title="Toggle Atmospheric Audio">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+      </button>
+
+      <a href="#heist-arena" class="btn-nav-cta">Steal The Tower</a>
+    </div>
+  </header>
+
+  <!-- Main Narrative Content -->
+  <main>
+
+    <!-- SECTION 0: HERO / LAUNCH (I2) -->
+    <!-- "The website will open with a horizontal view of the Eiffel tower, with a slow spin, with a black background and a gold, glowing aura coming off the tower." -->
+    <section id="hero-section">
+      <div class="hero-content">
+        <p class="hero-subtitle-top"><em>Chef-d'œuvre de l'Ingénierie & Mystère Parisien</em></p>
+        <h1 class="hero-title">LA TOUR MYSTIQUE</h1>
+        <p class="hero-tagline">
+          <em>"A radiant horizontal horizon, bathed in midnight obsidian and the eternal shimmer of celestial gold."</em>
+        </p>
+
+        <div class="hero-badge-row">
+          <div class="badge-pill">
+            <span>⚜️</span>
+            <span>Wrought Iron Elegance</span>
+          </div>
+          <div class="badge-pill">
+            <span>✨</span>
+            <span>Mystical Golden Aura</span>
+          </div>
+          <div class="badge-pill">
+            <span>🇫🇷</span>
+            <span>Parisian Heritage</span>
+          </div>
+        </div>
+
+        <div class="scroll-indicator" onclick="document.getElementById('feature-shape').scrollIntoView({behavior: 'smooth'})">
+          <span>Explore Architectural Secrets</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 1: FEATURE 1 - SHAPE (TRIANGULAR) & REPETITION (I3) -->
+    <!-- "Tall, slim structure with multiple gaps creating repetition. The object will spin in place as it glows." -->
+    <section id="feature-shape">
+      <div class="content-panel">
+        <div class="section-tag">
+          <span class="dot"></span>
+          <span>Caractéristique I : Géométrie Céleste</span>
+        </div>
+        <h2 class="panel-title">The Triangular Silhouette & <em>Infinite Repetition</em></h2>
+        <p class="panel-desc">
+          A tall, slim structure whose four sweeping parabolic arches rise to converge in majestic triangular harmony. 
+          Over <strong>18,038 individual puddle iron pieces</strong> interlock with multiple open latticed gaps, 
+          creating an ethereal visual rhythm of repetition that defies wind resistance and gravity alike.
+        </p>
+
+        <div class="feature-metrics">
+          <div class="metric-card">
+            <div class="metric-val">125 m</div>
+            <div class="metric-lbl">Base Span</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-val">18,038</div>
+            <div class="metric-lbl">Lattice Girders</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-val">2.5 M</div>
+            <div class="metric-lbl">Riveted Joints</div>
+          </div>
+        </div>
+
+        <div class="panel-actions">
+          <button class="btn-luxury" onclick="document.getElementById('feature-height').scrollIntoView({behavior: 'smooth'})">
+            Ascend to the Summit →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: FEATURE 2 - HEIGHT & SUMMIT VIEWING PLATFORM (I4) -->
+    <!-- "it can pan to the top of the tower, as that's a popular tourist attraction within Paris is (the viewing platform)" -->
+    <section id="feature-height">
+      <div class="content-panel">
+        <div class="section-tag">
+          <span class="dot"></span>
+          <span>Caractéristique II : Le Sommet de Paris</span>
+        </div>
+        <h2 class="panel-title">330 Metres of Stature & <em>The Summit Platform</em></h2>
+        <p class="panel-desc">
+          Towering 330 metres into the Parisian sky, the Eiffel Tower remains the highest accessible observation platform in the European Union. 
+          Millions journey each year to reach the Summit viewing platform, suspended 276 metres above the Champ de Mars, where Paris unfurls beneath your feet like a tapestry of golden lights.
+        </p>
+
+        <div class="level-pills">
+          <button class="btn-level" data-level="base">Base Arch</button>
+          <button class="btn-level" data-level="floor1">1st Floor (57m)</button>
+          <button class="btn-level" data-level="floor2">2nd Floor (115m)</button>
+          <button class="btn-level active" data-level="summit">Summit (276m)</button>
+        </div>
+
+        <div class="feature-metrics">
+          <div class="metric-card">
+            <div class="metric-val">330 m</div>
+            <div class="metric-lbl">Total Height</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-val">1,665</div>
+            <div class="metric-lbl">Stair Steps</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-val">7.0 M</div>
+            <div class="metric-lbl">Annual Guests</div>
+          </div>
+        </div>
+
+        <div class="panel-actions">
+          <button class="btn-luxury" onclick="document.getElementById('feature-material').scrollIntoView({behavior: 'smooth'})">
+            Inspect Material Grain →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: FEATURE 3 - MATERIAL REALISM & IRON TEXTURE (I5) -->
+    <!-- "The zoom will include the towers texture and realism of it." -->
+    <section id="feature-material">
+      <div class="content-panel">
+        <div class="section-tag">
+          <span class="dot"></span>
+          <span>Caractéristique III : L'Âme du Fer</span>
+        </div>
+        <h2 class="panel-title">Puddle Iron Lattice & <em>Tactile Realism</em></h2>
+        <p class="panel-desc">
+          Crafted from 7,300 metric tons of pure wrought puddle iron forged in Pompey, France. 
+          Unlike cast iron, puddle iron possesses ductile elasticity and industrial resilience. 
+          Zooming closely reveals the brushed metallic patinas, riveted gusset plates, and protective layers of specially mixed "Eiffel Tower Brown" pigment that glints under golden spotlights.
+        </p>
+
+        <div class="feature-metrics">
+          <div class="metric-card">
+            <div class="metric-val">10,100 t</div>
+            <div class="metric-lbl">Total Weight</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-val">60 t</div>
+            <div class="metric-lbl">Protective Paint</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-val">135+</div>
+            <div class="metric-lbl">Years of Grandeur</div>
+          </div>
+        </div>
+
+        <div class="panel-actions">
+          <button class="btn-luxury" onclick="document.getElementById('heist-briefing').scrollIntoView({behavior: 'smooth'})">
+            Open Heist Dossier →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: HEIST DOSSIER & THE FRENCH TRICOLOR (I6) -->
+    <!-- "As you scroll down, the French flag colours will appear, and text about the process of buying and stealing the tower will be available." -->
+    <section id="heist-briefing">
+      <div class="heist-brief-content">
+        <div class="tricolor-strip">
+          <span class="b"></span>
+          <span class="w"></span>
+          <span class="r"></span>
+        </div>
+
+        <div class="section-tag" style="justify-content: center;">
+          <span class="dot" style="background-color: #1d4ed8;"></span>
+          <span>Dossier Secret : Opération Dame de Fer</span>
+          <span class="dot" style="background-color: #dc2626;"></span>
+        </div>
+
+        <h2 class="panel-title" style="font-size: 3rem;">
+          How to Steal <em>The Eiffel Tower</em>
+        </h2>
+        <p class="panel-desc" style="max-width: 680px; margin: 0 auto 2rem;">
+          The legendary monument stands unguarded against quantum singularity technologies. 
+          Follow the four clandestine protocols to condense 10,100 tonnes of Parisian iron into your coat pocket without drawing the gaze of a single gendarme.
+        </p>
+
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-number">01</div>
+            <h3 class="step-title">Acquire the Compression Orb</h3>
+            <p class="step-text">
+              Commission the rare, hand-forged Quantum Vortex Orb infused with celestial golden resonance and French tricolor harmonics.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">02</div>
+            <h3 class="step-title">Infiltrate Champ de Mars</h3>
+            <p class="step-text">
+              Under the romantic cover of midnight, position yourself at prime trajectory with unobstructed line-of-sight to the central arch.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">03</div>
+            <h3 class="step-title">Throw & Compress</h3>
+            <p class="step-text">
+              Hurl the orb directly into the tower's core. The singularity triggers an instantaneous subatomic collapse, shrinking 330m to just 12cm.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">04</div>
+            <h3 class="step-title">Pocket & Stroll Away</h3>
+            <p class="step-text">
+              Slip the pocket-sized monument into your tuxedo pocket and savor an espresso along Boulevard Saint-Germain, completely undetected.
+            </p>
+          </div>
+        </div>
+
+        <div style="margin-top: 3rem;">
+          <a href="#heist-arena" class="btn-grand-cta">
+            Proceed to the Heist Arena ⚡
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: THE INTERACTIVE CTA - BUY & THROW THE ORB (I6) -->
+    <!-- "The user will have to buy a special orb, to then throw at the tower, which will shrink and makes it able to be taken away, without anyone noticing." -->
+    <section id="heist-arena">
+      <div class="arena-box">
+        <div class="section-tag" style="justify-content: center;">
+          <span class="dot"></span>
+          <span>Phase Finale : Exécution du Casse</span>
+        </div>
+
+        <h2 class="panel-title" style="font-size: 2.6rem;">
+          Execute <em>The Grand Heist</em>
+        </h2>
+        <p class="panel-desc">
+          To initiate the shrinking protocol, authorize procurement of the <strong>Special Compression Orb</strong>. 
+          Once armed, cast it with precision at the tower and witness 330 metres collapse into the palm of your hand!
+        </p>
+
+        <!-- Initial CTA: Buy Orb -->
+        <button class="btn-grand-cta" id="btn-open-buy">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 8v8M8 12h8"></path>
+          </svg>
+          Acquire Special Compression Orb
+        </button>
+
+        <!-- Armed Orb Weapon UI (Shown after buying) -->
+        <div class="orb-weapon-container" id="orb-weapon-box" style="display: none;">
+          <div class="special-orb" id="special-orb" title="Click or fling to throw at the tower!">
+            <div class="orb-ring"></div>
+          </div>
+          <div class="orb-instruction" id="orb-instruction">
+            ⚡ Click or Drag the Orb to throw at the Eiffel Tower!
+          </div>
+        </div>
+
+        <!-- Heist Success Alert -->
+        <div class="heist-status-banner" id="heist-status-banner"></div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: THE FINALE - RESTORATION & GRAND ENLARGEMENT (I6) -->
+    <!-- "You continue to scroll, and the tower will appear again(small) and glow with gold and will enlarge again." -->
+    <section id="finale-section">
+      <div class="content-panel finale-box">
+        <div class="section-tag">
+          <span class="dot"></span>
+          <span>Épilogue : Renaissance Dorée</span>
+        </div>
+        <h2 class="panel-title">Miniature Glow & <em>Monumental Restoration</em></h2>
+        <p class="panel-desc">
+          Having secured the pocket-sized Iron Lady, her internal puddle iron lattice pulses with an ancient, inextinguishable golden aura. 
+          As the quantum field dissipates, energy rings expand outward and the monument restores its monumental 330-metre majesty.
+        </p>
+
+        <div class="enlarge-control-box">
+          <button class="btn-luxury" id="btn-enlarge-tower" style="background: linear-gradient(135deg, #b45309, #f59e0b); color: #000; font-weight: 700;">
+            ✨ Enlarge Tower to Full Glory
+          </button>
+
+          <button class="btn-secondary" id="btn-shrink-again">
+            🔍 Shrink Back to Pocket Size
+          </button>
+
+          <div class="scale-slider-wrapper">
+            <span style="font-size: 0.85rem; color: var(--gold-bright);">Pocket (0.1x)</span>
+            <input type="range" id="scale-slider" min="0.08" max="1.5" step="0.02" value="1.0">
+            <span style="font-size: 0.85rem; color: var(--gold-bright);">Monument (1.5x)</span>
+          </div>
+        </div>
+
+        <div style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem;">
+          <a href="#hero-section" class="btn-secondary" style="display: inline-block;">
+            ↺ Revisit the Beginning
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Interactive 3D HUD & Controls -->
+  <div class="floating-hud">
+    <button class="hud-btn" id="btn-toggle-inspect" title="Enable Free 3D Orbit Mode">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"></circle>
+        <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+        <path d="M2 12h20"></path>
+      </svg>
+      <span class="hud-label">3D Orbit: OFF</span>
+    </button>
+
+    <div class="hud-divider"></div>
+
+    <button class="hud-btn" id="btn-reset-view" title="Reset Camera Perspective">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+        <path d="M3 3v5h5"></path>
+      </svg>
+      <span>Reset</span>
+    </button>
+  </div>
+
+  <!-- PURCHASE MODAL FOR THE SPECIAL ORB (I6) -->
+  <div class="modal-backdrop" id="buy-modal">
+    <div class="modal-card">
+      <button class="modal-close" id="btn-close-modal">&times;</button>
+      
+      <div class="section-tag" style="justify-content: center;">
+        <span class="dot"></span>
+        <span>Armurerie Clandestine</span>
+      </div>
+
+      <h3 style="font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 0.5rem; color: #fff;">
+        Quantum Shrink-Orb
+      </h3>
+      <p style="font-family: var(--font-serif); font-style: italic; color: var(--gold-subtle); font-size: 0.95rem;">
+        Model MK-VII Compression Singularity
+      </p>
+
+      <div class="orb-preview-render"></div>
+
+      <p style="font-size: 0.9rem; color: #cbd5e1; line-height: 1.6; margin-bottom: 1rem;">
+        Infused with dark matter and golden celestial specs. Collapses structural atomic bonds within 1.2 seconds of kinetic impact. Guaranteed 100% silent shrink.
+      </p>
+
+      <div class="modal-price">
+        <small>€9,999,999</small>
+        <span>€0.00 EUR</span>
+        <div style="font-size: 0.8rem; font-family: var(--font-sans); color: #34d399; font-weight: 500;">
+          ✓ Master Thief Clearance Authorized
+        </div>
+      </div>
+
+      <button class="btn-grand-cta" id="btn-confirm-buy" style="width: 100%; justify-content: center;">
+        Authorize & Arm Orb
+      </button>
+    </div>
+  </div>
+
+  <!-- FOOTER & CREDITS -->
+  <footer>
+    <p class="footer-text">
+      <em>La Tour Mystique</em> — 3D Interactive Web Experience based on the Product Requirement Document.
+    </p>
+    <p class="footer-sub">
+      3D Model: <a href="https://sketchfab.com/3d-models/eiffel-tower-model-3d-with-best-quality-c3391c293e70471e9a112f7855adcf2f" target="_blank" rel="noopener">"Eiffel Tower model 3D with best quality"</a> 
+      by <a href="https://sketchfab.com/shatlykxfree" target="_blank" rel="noopener">shatlykxfree</a> 
+      licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC-BY-4.0</a>.
+    </p>
+  </footer>
+
+  <!-- Scripts: Local with CDN fallback -->
+  <script src="libs/three.min.js"></script>
+  <script src="libs/GLTFLoader.js"></script>
+  <script src="libs/OrbitControls.js"></script>
+  <script src="libs/gsap.min.js"></script>
+  <script src="libs/ScrollTrigger.min.js"></script>
+  <script src="libs/canvas-confetti.min.js"></script>
+  
+  <!-- Main Application Script -->
+  <script src="app.js"></script>
+</body>
+</html>
