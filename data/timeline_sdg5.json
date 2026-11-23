@@ -1,0 +1,43 @@
+{
+  "title": "SDG 5 Global Progress Over 20 Years (2004 - 2024)",
+  "years": [2004, 2009, 2014, 2019, 2024],
+  "indicators": {
+    "parliament": {
+      "title": "Women in National Parliaments (%)",
+      "globalAverage": [15.6, 18.8, 22.1, 24.6, 26.9],
+      "developedAvg": [19.2, 22.5, 26.8, 29.5, 33.4],
+      "developingAvg": [13.8, 16.5, 19.3, 21.8, 23.5]
+    },
+    "payGap": {
+      "title": "Global Gender Pay Gap (%)",
+      "globalAverage": [26.0, 24.2, 22.5, 21.1, 20.0],
+      "developedAvg": [23.5, 20.8, 18.4, 16.5, 14.8],
+      "developingAvg": [29.1, 27.5, 25.8, 24.5, 23.6]
+    },
+    "laborParticipation": {
+      "title": "Female Labor Force Participation (%)",
+      "globalAverage": [51.2, 49.8, 48.9, 47.7, 47.3],
+      "developedAvg": [50.4, 52.1, 53.6, 54.8, 55.7],
+      "developingAvg": [51.5, 49.1, 47.4, 45.8, 45.0]
+    },
+    "legalProtectionIndex": {
+      "title": "Women, Business & Law Legal Index (0-100)",
+      "globalAverage": [64.2, 68.5, 71.8, 75.3, 77.9],
+      "developedAvg": [81.5, 86.2, 90.4, 94.1, 96.2],
+      "developingAvg": [58.2, 62.0, 65.1, 68.9, 71.4]
+    },
+    "nightSafetyAnxiety": {
+      "title": "Women Reporting Feeling Unsafe Walking Alone After Dark (%)",
+      "globalAverage": [62.0, 60.5, 59.2, 58.6, 58.0],
+      "developedAvg": [52.0, 49.5, 48.0, 46.5, 45.0],
+      "developingAvg": [68.5, 67.2, 66.0, 65.5, 64.8]
+    }
+  },
+  "summaryNotes": {
+    "2004": "Initial baseline: Parliaments under 16% female, substantial legal gaps in domestic violence and marital property laws.",
+    "2009": "Pre-SDG era (MDG 3): Gradual increase in primary education parity, but economic and physical security lagging.",
+    "2014": "Adoption prep for Agenda 2030: Recognition of unpaid care burden and gender-based violence as systemic blockers.",
+    "2019": "Rise of global movements (#MeToo, Ni Una Menos): Accelerated reporting and legal reforms in over 40 nations.",
+    "2024": "Current Telemetry: Significant legal gains (77.9 index), but night safety and economic equality remain urgent challenges."
+  }
+}

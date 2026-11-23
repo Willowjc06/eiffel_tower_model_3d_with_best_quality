@@ -1,4 +1,4 @@
-# Static HTTP Server for 3D Eiffel Tower Website
+# Static HTTP Server for Beyond the Shadows - UN SDG 5 Platform
 $port = 8080
 if ($args.Count -gt 0) {
     $port = [int]$args[0]
@@ -11,7 +11,7 @@ try {
     $listener.Prefixes.Add($prefix)
     $listener.Start()
     Write-Host "==========================================================" -ForegroundColor Cyan
-    Write-Host "  Mystical Eiffel Tower 3D Interactive Web Experience" -ForegroundColor Yellow
+    Write-Host "  Beyond the Shadows - UN SDG 5 Platform Server" -ForegroundColor Magenta
     Write-Host "  Server started at: $prefix" -ForegroundColor Green
     Write-Host "  Press Ctrl+C to stop the server" -ForegroundColor Gray
     Write-Host "==========================================================" -ForegroundColor Cyan
@@ -30,6 +30,7 @@ $mimeTypes = @{
     ".js"   = "application/javascript; charset=utf-8"
     ".json" = "application/json"
     ".gltf" = "model/gltf+json"
+    ".glb"  = "model/gltf-binary"
     ".bin"  = "application/octet-stream"
     ".svg"  = "image/svg+xml"
     ".png"  = "image/png"

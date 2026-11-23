@@ -1,7 +1,9 @@
 @echo off
-title Eiffel Tower 3D Interactive Website
+title Beyond the Shadows - UN SDG 5 Interactive Platform
 echo ==========================================================
-echo Starting Eiffel Tower 3D Interactive Experience...
+echo Starting UN SDG 5 Interactive Platform: Beyond the Shadows...
+echo Server running at: http://localhost:8080
+echo Press Ctrl+C in this window to stop the server.
 echo ==========================================================
 powershell -ExecutionPolicy Bypass -File "%~dp0serve.ps1" 8080
 pause

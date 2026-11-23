@@ -3,473 +3,933 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>La Tour Mystique — The 3D Heist of the Iron Lady</title>
-  
-  <!-- Google Fonts: Elegant Serif & Display fonts -->
+  <title>Beyond the Shadows | UN SDG 5: Global Gender Equality & Everyday Safety</title>
+  <meta name="description" content="An award-winning editorial interactive 3D and live data platform dedicated to UN Sustainable Development Goal 5 (Gender Equality), sexual assault survivor advocacy, and everyday public safety.">
+
+  <!-- Google Fonts: Outfit (Display), Plus Jakarta Sans (Interface), Fraunces (Editorial Serif) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  
-  <!-- Stylesheet -->
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,600&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Main Stylesheet -->
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗼</text></svg>">
 </head>
 <body>
 
-  <!-- Scroll Progress Indicator -->
-  <div class="scroll-progress-container">
-    <div class="scroll-progress-bar" id="scroll-progress"></div>
-  </div>
+  <!-- Atmospheric Glowing Cursor Follower -->
+  <div id="cursor-glow"></div>
 
-  <!-- Loading Screen -->
-  <div id="loader-overlay">
-    <div class="loader-crest">
-      <span class="b"></span>
-      <span class="w"></span>
-      <span class="r"></span>
-    </div>
-    
-    <svg class="loader-spire" viewBox="0 0 100 150">
-      <path class="loader-spire-path" d="M50 10 L50 25 M35 60 L65 60 M20 110 L80 110 M10 145 C 30 145, 35 120, 50 15 C 65 120, 70 145, 90 145" />
-    </svg>
-
-    <h2 class="loader-title">LA TOUR MYSTIQUE</h2>
-    <p class="loader-sub"><em>Initialisation de l'Opération Mystique</em></p>
-    
-    <div class="loader-bar-box">
-      <div class="loader-bar-fill" id="loader-fill"></div>
-    </div>
-    <div class="loader-status" id="loader-status">Forging 18,038 Puddle Iron Lattice Elements...</div>
-  </div>
-
-  <!-- Ambient Mystical Aura Background -->
-  <div class="mystical-bg-glow" id="mystical-glow"></div>
-
-  <!-- Three.js Canvas Container -->
-  <div id="webgl-container"></div>
-
-  <!-- Top Navigation Bar -->
-  <header class="navbar">
-    <div class="brand-wrapper">
-      <div class="tricolor-crest" title="République Française">
-        <span class="b"></span>
-        <span class="w"></span>
-        <span class="r"></span>
+  <!-- Safety Banner: Quick Exit Button (ESC shortcut) & Soundscape Toggle -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand-wrapper">
+        <span class="brand-badge">SDG 5</span>
+        <div class="brand-title">Beyond the <span>Shadows</span></div>
       </div>
-      <div>
-        <span class="brand-title">La Tour Mystique</span>
-        <span class="brand-tag"><em>Édition Spéciale</em></span>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#hero">Overview</a></li>
+          <li><a href="#everyday-safety">Night Walk</a></li>
+          <li><a href="#global-pulse">Global 3D Earth</a></li>
+          <li><a href="#macro-data">Data Pulse</a></li>
+          <li><a href="#reflection">Stereotype Myths</a></li>
+          <li><a href="#emergency-helplines">Crisis 3D Phone</a></li>
+          <li><a href="#take-action">Charities</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Reduced Motion / Accessibility Toggle -->
+        <button id="btn-motion-toggle" class="btn-soundscape" title="Toggle reduced motion (WCAG 2.1 AA)">
+          <span class="icon">⚡</span> Motion: Auto
+        </button>
+
+        <!-- Meditative Soundscape Toggle -->
+        <button id="btn-soundscape-toggle" class="btn-soundscape" title="Toggle peaceful ambient audio (Web Audio API)">
+          <span class="icon">🌿</span> Soundscape: OFF
+        </button>
+
+        <!-- Trauma-Informed Safety Feature: Emergency Quick Exit -->
+        <button class="btn-quick-exit js-quick-exit" title="Safety feature: Instantly hides this screen by opening BBC Weather if an abuser enters">
+          <span class="exit-icon">🛡️</span> Quick Exit [ESC]
+        </button>
       </div>
-    </div>
-
-    <nav>
-      <ul class="nav-links">
-        <li><a href="#hero-section" class="active">Overview</a></li>
-        <li><a href="#feature-shape">Silhouette</a></li>
-        <li><a href="#feature-height">The Summit</a></li>
-        <li><a href="#feature-material">Iron Realism</a></li>
-        <li><a href="#heist-briefing">The Masterplan</a></li>
-        <li><a href="#heist-arena">The Heist</a></li>
-        <li><a href="#finale-section">Restoration</a></li>
-      </ul>
-    </nav>
-
-    <div class="nav-actions">
-      <button class="btn-icon" id="btn-toggle-sound" title="Toggle Atmospheric Audio">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-        </svg>
-      </button>
-
-      <a href="#heist-arena" class="btn-nav-cta">Steal The Tower</a>
     </div>
   </header>
 
-  <!-- Main Narrative Content -->
-  <main>
-
-    <!-- SECTION 0: HERO / LAUNCH (I2) -->
-    <!-- "The website will open with a horizontal view of the Eiffel tower, with a slow spin, with a black background and a gold, glowing aura coming off the tower." -->
-    <section id="hero-section">
-      <div class="hero-content">
-        <p class="hero-subtitle-top"><em>Chef-d'œuvre de l'Ingénierie & Mystère Parisien</em></p>
-        <h1 class="hero-title">LA TOUR MYSTIQUE</h1>
-        <p class="hero-tagline">
-          <em>"A radiant horizontal horizon, bathed in midnight obsidian and the eternal shimmer of celestial gold."</em>
-        </p>
-
-        <div class="hero-badge-row">
-          <div class="badge-pill">
-            <span>⚜️</span>
-            <span>Wrought Iron Elegance</span>
-          </div>
-          <div class="badge-pill">
-            <span>✨</span>
-            <span>Mystical Golden Aura</span>
-          </div>
-          <div class="badge-pill">
-            <span>🇫🇷</span>
-            <span>Parisian Heritage</span>
-          </div>
-        </div>
-
-        <div class="scroll-indicator" onclick="document.getElementById('feature-shape').scrollIntoView({behavior: 'smooth'})">
-          <span>Explore Architectural Secrets</span>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="6 9 12 15 18 9"></polyline>
-          </svg>
-        </div>
+  <!-- Live API Notification Ticker Bar -->
+  <div class="api-status-bar">
+    <div class="container api-status-inner">
+      <div>
+        <span id="api-live-indicator" class="status-indicator status-live"></span>
+        <span id="api-live-label"><strong>Live APIs Connected:</strong> World Bank Open Data &amp; UN SDG Indicators synced</span>
       </div>
-    </section>
-
-    <!-- SECTION 1: FEATURE 1 - SHAPE (TRIANGULAR) & REPETITION (I3) -->
-    <!-- "Tall, slim structure with multiple gaps creating repetition. The object will spin in place as it glows." -->
-    <section id="feature-shape">
-      <div class="content-panel">
-        <div class="section-tag">
-          <span class="dot"></span>
-          <span>Caractéristique I : Géométrie Céleste</span>
-        </div>
-        <h2 class="panel-title">The Triangular Silhouette & <em>Infinite Repetition</em></h2>
-        <p class="panel-desc">
-          A tall, slim structure whose four sweeping parabolic arches rise to converge in majestic triangular harmony. 
-          Over <strong>18,038 individual puddle iron pieces</strong> interlock with multiple open latticed gaps, 
-          creating an ethereal visual rhythm of repetition that defies wind resistance and gravity alike.
-        </p>
-
-        <div class="feature-metrics">
-          <div class="metric-card">
-            <div class="metric-val">125 m</div>
-            <div class="metric-lbl">Base Span</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-val">18,038</div>
-            <div class="metric-lbl">Lattice Girders</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-val">2.5 M</div>
-            <div class="metric-lbl">Riveted Joints</div>
-          </div>
-        </div>
-
-        <div class="panel-actions">
-          <button class="btn-luxury" onclick="document.getElementById('feature-height').scrollIntoView({behavior: 'smooth'})">
-            Ascend to the Summit →
-          </button>
-        </div>
+      <div>
+        <span>Global Mission: <strong style="color: var(--teal-vibrant);">Universal Survivor Safety &amp; Gender Parity by 2030</strong></span>
       </div>
-    </section>
-
-    <!-- SECTION 2: FEATURE 2 - HEIGHT & SUMMIT VIEWING PLATFORM (I4) -->
-    <!-- "it can pan to the top of the tower, as that's a popular tourist attraction within Paris is (the viewing platform)" -->
-    <section id="feature-height">
-      <div class="content-panel">
-        <div class="section-tag">
-          <span class="dot"></span>
-          <span>Caractéristique II : Le Sommet de Paris</span>
-        </div>
-        <h2 class="panel-title">330 Metres of Stature & <em>The Summit Platform</em></h2>
-        <p class="panel-desc">
-          Towering 330 metres into the Parisian sky, the Eiffel Tower remains the highest accessible observation platform in the European Union. 
-          Millions journey each year to reach the Summit viewing platform, suspended 276 metres above the Champ de Mars, where Paris unfurls beneath your feet like a tapestry of golden lights.
-        </p>
-
-        <div class="level-pills">
-          <button class="btn-level" data-level="base">Base Arch</button>
-          <button class="btn-level" data-level="floor1">1st Floor (57m)</button>
-          <button class="btn-level" data-level="floor2">2nd Floor (115m)</button>
-          <button class="btn-level active" data-level="summit">Summit (276m)</button>
-        </div>
-
-        <div class="feature-metrics">
-          <div class="metric-card">
-            <div class="metric-val">330 m</div>
-            <div class="metric-lbl">Total Height</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-val">1,665</div>
-            <div class="metric-lbl">Stair Steps</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-val">7.0 M</div>
-            <div class="metric-lbl">Annual Guests</div>
-          </div>
-        </div>
-
-        <div class="panel-actions">
-          <button class="btn-luxury" onclick="document.getElementById('feature-material').scrollIntoView({behavior: 'smooth'})">
-            Inspect Material Grain →
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 3: FEATURE 3 - MATERIAL REALISM & IRON TEXTURE (I5) -->
-    <!-- "The zoom will include the towers texture and realism of it." -->
-    <section id="feature-material">
-      <div class="content-panel">
-        <div class="section-tag">
-          <span class="dot"></span>
-          <span>Caractéristique III : L'Âme du Fer</span>
-        </div>
-        <h2 class="panel-title">Puddle Iron Lattice & <em>Tactile Realism</em></h2>
-        <p class="panel-desc">
-          Crafted from 7,300 metric tons of pure wrought puddle iron forged in Pompey, France. 
-          Unlike cast iron, puddle iron possesses ductile elasticity and industrial resilience. 
-          Zooming closely reveals the brushed metallic patinas, riveted gusset plates, and protective layers of specially mixed "Eiffel Tower Brown" pigment that glints under golden spotlights.
-        </p>
-
-        <div class="feature-metrics">
-          <div class="metric-card">
-            <div class="metric-val">10,100 t</div>
-            <div class="metric-lbl">Total Weight</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-val">60 t</div>
-            <div class="metric-lbl">Protective Paint</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-val">135+</div>
-            <div class="metric-lbl">Years of Grandeur</div>
-          </div>
-        </div>
-
-        <div class="panel-actions">
-          <button class="btn-luxury" onclick="document.getElementById('heist-briefing').scrollIntoView({behavior: 'smooth'})">
-            Open Heist Dossier →
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 4: HEIST DOSSIER & THE FRENCH TRICOLOR (I6) -->
-    <!-- "As you scroll down, the French flag colours will appear, and text about the process of buying and stealing the tower will be available." -->
-    <section id="heist-briefing">
-      <div class="heist-brief-content">
-        <div class="tricolor-strip">
-          <span class="b"></span>
-          <span class="w"></span>
-          <span class="r"></span>
-        </div>
-
-        <div class="section-tag" style="justify-content: center;">
-          <span class="dot" style="background-color: #1d4ed8;"></span>
-          <span>Dossier Secret : Opération Dame de Fer</span>
-          <span class="dot" style="background-color: #dc2626;"></span>
-        </div>
-
-        <h2 class="panel-title" style="font-size: 3rem;">
-          How to Steal <em>The Eiffel Tower</em>
-        </h2>
-        <p class="panel-desc" style="max-width: 680px; margin: 0 auto 2rem;">
-          The legendary monument stands unguarded against quantum singularity technologies. 
-          Follow the four clandestine protocols to condense 10,100 tonnes of Parisian iron into your coat pocket without drawing the gaze of a single gendarme.
-        </p>
-
-        <div class="steps-grid">
-          <div class="step-card">
-            <div class="step-number">01</div>
-            <h3 class="step-title">Acquire the Compression Orb</h3>
-            <p class="step-text">
-              Commission the rare, hand-forged Quantum Vortex Orb infused with celestial golden resonance and French tricolor harmonics.
-            </p>
-          </div>
-
-          <div class="step-card">
-            <div class="step-number">02</div>
-            <h3 class="step-title">Infiltrate Champ de Mars</h3>
-            <p class="step-text">
-              Under the romantic cover of midnight, position yourself at prime trajectory with unobstructed line-of-sight to the central arch.
-            </p>
-          </div>
-
-          <div class="step-card">
-            <div class="step-number">03</div>
-            <h3 class="step-title">Throw & Compress</h3>
-            <p class="step-text">
-              Hurl the orb directly into the tower's core. The singularity triggers an instantaneous subatomic collapse, shrinking 330m to just 12cm.
-            </p>
-          </div>
-
-          <div class="step-card">
-            <div class="step-number">04</div>
-            <h3 class="step-title">Pocket & Stroll Away</h3>
-            <p class="step-text">
-              Slip the pocket-sized monument into your tuxedo pocket and savor an espresso along Boulevard Saint-Germain, completely undetected.
-            </p>
-          </div>
-        </div>
-
-        <div style="margin-top: 3rem;">
-          <a href="#heist-arena" class="btn-grand-cta">
-            Proceed to the Heist Arena ⚡
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 5: THE INTERACTIVE CTA - BUY & THROW THE ORB (I6) -->
-    <!-- "The user will have to buy a special orb, to then throw at the tower, which will shrink and makes it able to be taken away, without anyone noticing." -->
-    <section id="heist-arena">
-      <div class="arena-box">
-        <div class="section-tag" style="justify-content: center;">
-          <span class="dot"></span>
-          <span>Phase Finale : Exécution du Casse</span>
-        </div>
-
-        <h2 class="panel-title" style="font-size: 2.6rem;">
-          Execute <em>The Grand Heist</em>
-        </h2>
-        <p class="panel-desc">
-          To initiate the shrinking protocol, authorize procurement of the <strong>Special Compression Orb</strong>. 
-          Once armed, cast it with precision at the tower and witness 330 metres collapse into the palm of your hand!
-        </p>
-
-        <!-- Initial CTA: Buy Orb -->
-        <button class="btn-grand-cta" id="btn-open-buy">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"></circle>
-            <path d="M12 8v8M8 12h8"></path>
-          </svg>
-          Acquire Special Compression Orb
-        </button>
-
-        <!-- Armed Orb Weapon UI (Shown after buying) -->
-        <div class="orb-weapon-container" id="orb-weapon-box" style="display: none;">
-          <div class="special-orb" id="special-orb" title="Click or fling to throw at the tower!">
-            <div class="orb-ring"></div>
-          </div>
-          <div class="orb-instruction" id="orb-instruction">
-            ⚡ Click or Drag the Orb to throw at the Eiffel Tower!
-          </div>
-        </div>
-
-        <!-- Heist Success Alert -->
-        <div class="heist-status-banner" id="heist-status-banner"></div>
-      </div>
-    </section>
-
-    <!-- SECTION 6: THE FINALE - RESTORATION & GRAND ENLARGEMENT (I6) -->
-    <!-- "You continue to scroll, and the tower will appear again(small) and glow with gold and will enlarge again." -->
-    <section id="finale-section">
-      <div class="content-panel finale-box">
-        <div class="section-tag">
-          <span class="dot"></span>
-          <span>Épilogue : Renaissance Dorée</span>
-        </div>
-        <h2 class="panel-title">Miniature Glow & <em>Monumental Restoration</em></h2>
-        <p class="panel-desc">
-          Having secured the pocket-sized Iron Lady, her internal puddle iron lattice pulses with an ancient, inextinguishable golden aura. 
-          As the quantum field dissipates, energy rings expand outward and the monument restores its monumental 330-metre majesty.
-        </p>
-
-        <div class="enlarge-control-box">
-          <button class="btn-luxury" id="btn-enlarge-tower" style="background: linear-gradient(135deg, #b45309, #f59e0b); color: #000; font-weight: 700;">
-            ✨ Enlarge Tower to Full Glory
-          </button>
-
-          <button class="btn-secondary" id="btn-shrink-again">
-            🔍 Shrink Back to Pocket Size
-          </button>
-
-          <div class="scale-slider-wrapper">
-            <span style="font-size: 0.85rem; color: var(--gold-bright);">Pocket (0.1x)</span>
-            <input type="range" id="scale-slider" min="0.08" max="1.5" step="0.02" value="1.0">
-            <span style="font-size: 0.85rem; color: var(--gold-bright);">Monument (1.5x)</span>
-          </div>
-        </div>
-
-        <div style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem;">
-          <a href="#hero-section" class="btn-secondary" style="display: inline-block;">
-            ↺ Revisit the Beginning
-          </a>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- Interactive 3D HUD & Controls -->
-  <div class="floating-hud">
-    <button class="hud-btn" id="btn-toggle-inspect" title="Enable Free 3D Orbit Mode">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="12" cy="12" r="10"></circle>
-        <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
-        <path d="M2 12h20"></path>
-      </svg>
-      <span class="hud-label">3D Orbit: OFF</span>
-    </button>
-
-    <div class="hud-divider"></div>
-
-    <button class="hud-btn" id="btn-reset-view" title="Reset Camera Perspective">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
-        <path d="M3 3v5h5"></path>
-      </svg>
-      <span>Reset</span>
-    </button>
-  </div>
-
-  <!-- PURCHASE MODAL FOR THE SPECIAL ORB (I6) -->
-  <div class="modal-backdrop" id="buy-modal">
-    <div class="modal-card">
-      <button class="modal-close" id="btn-close-modal">&times;</button>
-      
-      <div class="section-tag" style="justify-content: center;">
-        <span class="dot"></span>
-        <span>Armurerie Clandestine</span>
-      </div>
-
-      <h3 style="font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 0.5rem; color: #fff;">
-        Quantum Shrink-Orb
-      </h3>
-      <p style="font-family: var(--font-serif); font-style: italic; color: var(--gold-subtle); font-size: 0.95rem;">
-        Model MK-VII Compression Singularity
-      </p>
-
-      <div class="orb-preview-render"></div>
-
-      <p style="font-size: 0.9rem; color: #cbd5e1; line-height: 1.6; margin-bottom: 1rem;">
-        Infused with dark matter and golden celestial specs. Collapses structural atomic bonds within 1.2 seconds of kinetic impact. Guaranteed 100% silent shrink.
-      </p>
-
-      <div class="modal-price">
-        <small>€9,999,999</small>
-        <span>€0.00 EUR</span>
-        <div style="font-size: 0.8rem; font-family: var(--font-sans); color: #34d399; font-weight: 500;">
-          ✓ Master Thief Clearance Authorized
-        </div>
-      </div>
-
-      <button class="btn-grand-cta" id="btn-confirm-buy" style="width: 100%; justify-content: center;">
-        Authorize & Arm Orb
-      </button>
     </div>
   </div>
 
-  <!-- FOOTER & CREDITS -->
-  <footer>
-    <p class="footer-text">
-      <em>La Tour Mystique</em> — 3D Interactive Web Experience based on the Product Requirement Document.
-    </p>
-    <p class="footer-sub">
-      3D Model: <a href="https://sketchfab.com/3d-models/eiffel-tower-model-3d-with-best-quality-c3391c293e70471e9a112f7855adcf2f" target="_blank" rel="noopener">"Eiffel Tower model 3D with best quality"</a> 
-      by <a href="https://sketchfab.com/shatlykxfree" target="_blank" rel="noopener">shatlykxfree</a> 
-      licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC-BY-4.0</a>.
-    </p>
+  <main>
+    <!-- ==========================================================================
+         Hero Section: The 3D Hydrangea Purple Flower Centerpiece & Ambient Experience
+         ========================================================================== -->
+    <section id="hero" class="hero-section">
+      <!-- 3D Hydrangea Purple Model Background Canvas -->
+      <div class="flower-hero-backdrop">
+        <div id="flower-loader-status" class="canvas-loader-overlay">
+          <div class="canvas-loader-spinner"></div>
+          <div class="canvas-loader-text">Loading 3D Purple Hydrangea (<span id="flower-loader-pct">0%</span>)...</div>
+        </div>
+        <div id="flower-hero-canvas">
+          <!-- Three.js Hydrangea Purple Model Injected Here -->
+        </div>
+
+        <!-- 3D Flower Interactive Atmosphere Controls -->
+        <div class="flower-canvas-overlay">
+          <button id="btn-flower-spin" class="flower-theme-btn active" title="Toggle flower rotation">
+            <span class="icon">🔄</span> Auto-Orbit: ON
+          </button>
+          <button id="btn-flower-theme-teal" class="flower-theme-btn active" title="Survivor Teal Lighting">
+            Survivor Teal
+          </button>
+          <button id="btn-flower-theme-violet" class="flower-theme-btn" title="Hydrangea Twilight">
+            Twilight Violet
+          </button>
+          <button id="btn-flower-theme-cyan" class="flower-theme-btn" title="Luminescent Cyan">
+            Luminescence
+          </button>
+          <button id="btn-flower-reset" class="flower-theme-btn" title="Reset View">
+            Reset ↺
+          </button>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-tag">
+            <span>🎗️ Survivor Solidarity &bull; UN SDG Goal 5</span>
+          </div>
+
+          <h1 class="hero-title">
+            Illuminating Everyday Safety &amp; <span class="highlight-teal">Global Gender Equality</span>
+          </h1>
+
+          <p class="hero-lead">
+            Every day, millions of women navigate invisible fear, systemic pay penalties, and street harassment. 
+            <span class="serif-italic">The fight for safety, autonomy, and dignity must never lie solely upon a survivor.</span> 
+            Adorned in Survivor Teal and the enduring purple hydrangea—a symbol of resilience and collective healing—this platform connects live international telemetry with immersive 3D narratives to inspire unyielding allyship.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#global-pulse" class="btn-primary">
+              <span class="icon">🌍</span> Explore Live 3D Earth
+            </a>
+            <a href="#emergency-helplines" class="btn-secondary">
+              <span class="icon">📞</span> Crisis 3D Phone Lifelines
+            </a>
+            <a href="#reflection" class="btn-secondary">
+              <span class="icon">🤝</span> Allyship Pledge
+            </a>
+          </div>
+
+          <!-- Stat Counters Grid with Survivor Teal Accents -->
+          <div class="stat-counters-grid">
+            <div class="stat-card">
+              <div class="stat-value">1 in 3</div>
+              <div class="stat-label">Lifetime Violence</div>
+              <div class="stat-subtext">Women globally face physical or sexual assault (UN Women, 2024)</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value"><span class="js-counter" data-target="20.0" data-suffix="%">0%</span></div>
+              <div class="stat-label">Global Pay Gap</div>
+              <div class="stat-subtext">Women earn 80 cents for every dollar earned by men</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value"><span class="js-counter" data-target="26.9" data-suffix="%">0%</span></div>
+              <div class="stat-label">Parliamentary Seats</div>
+              <div class="stat-subtext">Proportion of seats held by women in national parliaments</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value"><span class="js-counter" data-target="58" data-suffix="%">0%</span></div>
+              <div class="stat-label">Night Safety Anxiety</div>
+              <div class="stat-subtext">Women report feeling unsafe walking alone after dark in urban areas</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mindful Content Warning Banner (Blueprint Section 5) -->
+    <div class="container">
+      <aside class="trigger-warning-banner" id="trigger-warning" role="region" aria-label="Content Warning">
+        <div class="trigger-warning-icon">🕊️</div>
+        <div class="trigger-warning-content">
+          <div class="trigger-warning-title">Mindful Content Notice &amp; Survivor Agency</div>
+          <p class="trigger-warning-text">
+            This platform contains discussion, data, and experiential representations of gender-based violence, street harassment, and intimate partner abuse. 
+            We prioritize your emotional well-being and agency. If you are in distress or danger, confidential 24/7 lifelines are accessible via the 
+            <strong>Quick Exit [ESC]</strong> button or the <strong>Crisis Helplines</strong> section below.
+          </p>
+          <div class="trigger-warning-actions">
+            <button id="btn-dismiss-warning" class="btn-trigger-action">Understood, Continue Reading</button>
+            <a href="#emergency-helplines" class="btn-trigger-action" style="background: rgba(45, 212, 191, 0.15); border-color: rgba(45, 212, 191, 0.4); color: var(--teal-light);">Jump to 24/7 Lifelines</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- ==========================================================================
+         Act 1: The Everyday Reality & The 3D Night Walk
+         ========================================================================== -->
+    <section id="everyday-safety" class="section-wrapper">
+      <div class="container">
+        <span class="section-badge">Act 1: The Micro-Perspective</span>
+        <h2 class="section-title">The Everyday Reality: Walking Alone After Dark</h2>
+        <p class="section-subtitle">
+          Gender inequality is not merely an abstract figure on a report. It is felt in every evening commute—in the constant risk calculations, detours, and hypervigilance women must endure navigating public spaces.
+        </p>
+
+        <!-- Ministerial Address Quote Banner -->
+        <div class="quote-callout-banner">
+          <p class="quote-speech-text">
+            “I listened as a group of women and girls in Liverpool shared their personal safety worries when walking, particularly alone after dark. Violence and fear continue to limit women's freedom and participation in society every single day.”
+          </p>
+          <div class="quote-author">Lillian Greenwood, Minister for the Future of Roads</div>
+          <div class="quote-source">UK Government Official Address on Women's Safety, Transport &amp; Public Mobility</div>
+        </div>
+
+        <!-- 3D Night Walk Showcase Box -->
+        <div class="maze-showcase-box">
+          <div class="maze-layout">
+            <div id="maze-canvas-container">
+              <!-- Three.js Isometric Night Walk Canvas -->
+            </div>
+
+            <div class="maze-info-panel">
+              <div class="maze-step-card">
+                <div class="maze-card-header">
+                  <span id="maze-step-badge" class="badge-step">Stage 1 of 5</span>
+                  <span id="maze-step-location" class="maze-location">Campus / Office Exit</span>
+                </div>
+                <h4 id="maze-step-title" class="maze-step-title">9:15 PM — Departure &amp; The Mental Checklist</h4>
+                <div id="maze-step-stat" class="maze-step-stat">81% of Women Calculate Route Safety</div>
+                <p id="maze-step-desc" class="maze-step-desc">
+                  Before stepping outside, the subconscious risk checklist starts: checking phone battery level, holding keys between fingers, and planning journeys exclusively through lit corridors.
+                </p>
+                <div id="maze-step-quote" class="maze-step-quote">
+                  "You shouldn't have to map out an emergency escape plan through your own hometown."
+                </div>
+              </div>
+
+              <!-- Branching Decision Box (Revealed at Stage 3) -->
+              <div id="maze-branching-choices" class="maze-branching-choices" style="display: none;">
+                <span class="spot-tag" style="color: var(--coral-alert);">Decision Point: Choose Your Route</span>
+                <button id="btn-choice-detour" class="btn-branch-choice active">
+                  <strong>🛣️ Option A: Well-Lit Main Road (+20 Mins)</strong>
+                  <small>Longer detour along lit avenues and open storefronts. High time tax, but lower acute threat.</small>
+                </button>
+                <button id="btn-choice-shortcut" class="btn-branch-choice">
+                  <strong>🌑 Option B: The Shortcut Alleyway (4 Mins)</strong>
+                  <small>Direct passage through unlit alcoves. Broken streetlights, blind corners, extreme anxiety.</small>
+                </button>
+              </div>
+
+              <!-- Maze Navigation Controls -->
+              <div class="maze-nav-bar">
+                <button id="btn-maze-prev" class="btn-ctrl">‹ Previous Step</button>
+                <div class="maze-step-dots">
+                  <span class="maze-step-dot active" data-step="0" title="Stage 1: Departure"></span>
+                  <span class="maze-step-dot" data-step="1" title="Stage 2: The Corner"></span>
+                  <span class="maze-step-dot" data-step="2" title="Stage 3: The Shortcut"></span>
+                  <span class="maze-step-dot" data-step="3" title="Stage 4: Footsteps Behind"></span>
+                  <span class="maze-step-dot" data-step="4" title="Stage 5: Safe Arrival"></span>
+                </div>
+                <button id="btn-maze-next" class="btn-ctrl">Next Step ›</button>
+              </div>
+
+              <!-- Footstep Synthesizer Toggle -->
+              <div style="margin-top: 1rem;">
+                <button id="btn-maze-audio" class="btn-ctrl" style="width: 100%; justify-content: center;">
+                  <span class="icon">🔈</span> Footstep Audio: OFF (Click to Enable Synthesized Footsteps)
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         Act 2: The Global Pulse — 3D Earth in Tandem with Live APIs
+         ========================================================================== -->
+    <section id="global-pulse" class="section-wrapper">
+      <div class="container">
+        <span class="section-badge">Act 2: The Global Pulse</span>
+        <h2 class="section-title">The 3D Earth: Live International Telemetry</h2>
+        <p class="section-subtitle">
+          Gender-based violence and inequality know no borders. Interact with the 3D Earth model operating in direct tandem with the <strong>World Bank Open Data API</strong> and <strong>UN SDG 5 Indicators</strong>.
+        </p>
+
+        <!-- 3D Earth Showcase Box -->
+        <div class="globe-showcase-box">
+          <div class="globe-header-row">
+            <div>
+              <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.25rem;">Interactive 3D Earth &amp; Live API Sync</h3>
+              <p class="stat-subtext" id="earth-api-ping-badge">
+                <span class="status-indicator status-live"></span> Connected to World Bank Open Data API &amp; UN SDG 5 Database
+              </p>
+            </div>
+            <div class="globe-controls-group">
+              <button id="btn-globe-rotate" class="btn-ctrl" title="Toggle Earth Auto-Rotation">
+                <span class="icon">🔄</span> Auto-Spin: ON
+              </button>
+            </div>
+          </div>
+
+          <div class="globe-layout">
+            <div id="globe-canvas-container">
+              <div id="globe-loader-status" class="canvas-loader-overlay">
+                <div class="canvas-loader-spinner"></div>
+                <div class="canvas-loader-text">Loading 3D Earth Model (<span id="globe-loader-pct">0%</span>)...</div>
+              </div>
+              <!-- Three.js Earth GLB Model Injected Here -->
+            </div>
+
+            <div class="globe-info-panel">
+              <div class="globe-spot-card">
+                <span class="spot-tag">Selected Geolocation Beacon</span>
+                <h4 id="globe-spot-title" class="spot-title">United Kingdom &amp; Western Europe</h4>
+                <div id="globe-spot-stat" class="spot-stat">14.3% Pay Gap &amp; 58% Night Anxiety</div>
+                <p id="globe-spot-quote" class="spot-quote">
+                  "I listened as a group of women and girls in Liverpool shared their personal safety worries when walking, particularly alone after dark." — Lillian Greenwood, UK Roads Minister
+                </p>
+                <p id="globe-spot-detail" class="spot-detail">
+                  1 in 3 women in the UK have experienced street harassment in public transit or sidewalks in the last 12 months.
+                </p>
+              </div>
+
+              <!-- Quick Region Selector Pills -->
+              <div>
+                <span class="stat-subtext" style="display:block; margin-bottom: 0.5rem; font-weight: 600; color: var(--teal-light);">Jump to Region on 3D Earth:</span>
+                <div class="globe-regions-pills">
+                  <button class="globe-region-pill active" data-index="0">UK &amp; Europe</button>
+                  <button class="globe-region-pill" data-index="1">North America</button>
+                  <button class="globe-region-pill" data-index="2">Sub-Saharan Africa</button>
+                  <button class="globe-region-pill" data-index="3">South Asia</button>
+                  <button class="globe-region-pill" data-index="4">Latin America</button>
+                  <button class="globe-region-pill" data-index="5">East Asia</button>
+                  <button class="globe-region-pill" data-index="6">Oceania</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         Act 3: The Macro Data Pulse (Chart.js & Verified Indicators)
+         ========================================================================== -->
+    <section id="macro-data" class="section-wrapper">
+      <div class="container">
+        <span class="section-badge">Act 3: Empirical Analytics</span>
+        <h2 class="section-title">The Data Pulse: Statistics That Demand Action</h2>
+        <p class="section-subtitle">
+          Presented with empirical clarity in survivor teal and violet palettes. Sourced directly from WHO, United Nations Women, and World Bank indicators.
+        </p>
+
+        <!-- Charts Grid -->
+        <div class="charts-grid">
+          <!-- Chart 1: Regional Violence Prevalence -->
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h3 class="chart-card-title">1 in 3: Global Violence Against Women</h3>
+              <p class="chart-card-subtitle">Lifetime prevalence of intimate partner &amp; sexual violence by global region (WHO / UN Women)</p>
+            </div>
+            <div class="chart-canvas-wrap">
+              <canvas id="chart-violence-canvas"></canvas>
+            </div>
+          </div>
+
+          <!-- Chart 2: The Gender Pay & Leadership Gap -->
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h3 class="chart-card-title">Economic Parity &amp; Leadership Disparity</h3>
+              <p class="chart-card-subtitle">Comparing the Gender Wage Gap (%) with Parliamentary Representation across nations</p>
+            </div>
+            <div class="chart-canvas-wrap">
+              <canvas id="chart-paygap-canvas"></canvas>
+            </div>
+          </div>
+
+          <!-- Chart 3: Street Safety Perception Gap -->
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h3 class="chart-card-title">The Night Safety Perception Divide</h3>
+              <p class="chart-card-subtitle">Percentage of women vs. men who feel safe walking alone after dark in their own communities (Gallup &amp; ONS)</p>
+            </div>
+            <div class="chart-canvas-wrap">
+              <canvas id="chart-safety-canvas"></canvas>
+            </div>
+          </div>
+
+          <!-- Chart 4: Safety & Justice Index -->
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h3 class="chart-card-title">Safety &amp; Justice Index: Laws vs. Reality</h3>
+              <p class="chart-card-subtitle">World Bank Women, Business &amp; Law Score (0-100) vs. Female Night Safety Perceptions (%)</p>
+            </div>
+            <div class="chart-canvas-wrap">
+              <canvas id="chart-justice-canvas"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Country Explorer Scorecard -->
+        <div class="country-explorer-box">
+          <div class="explorer-header">
+            <div>
+              <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 0.25rem;">Interactive Country Explorer</h3>
+              <p class="stat-subtext">Select a country to review its SDG 5 scorecard (synced with World Bank indicators).</p>
+            </div>
+            <div>
+              <select id="country-select" class="country-select-dropdown" aria-label="Select Country to examine gender indicators">
+                <!-- Dynamically populated by charts-app.js -->
+              </select>
+            </div>
+          </div>
+
+          <div class="scorecard-metrics-grid">
+            <div class="sc-metric-item">
+              <div class="sc-metric-label">Country Analyzed</div>
+              <div id="sc-country-name" class="sc-metric-value" style="font-size: 1.45rem;">United Kingdom</div>
+            </div>
+            <div class="sc-metric-item">
+              <div class="sc-metric-label">Gender Pay Gap</div>
+              <div id="sc-paygap" class="sc-metric-value" style="color: var(--teal-vibrant);">14.3%</div>
+            </div>
+            <div class="sc-metric-item">
+              <div class="sc-metric-label">Female Labor Force Participation</div>
+              <div id="sc-labor" class="sc-metric-value" style="color: var(--teal-light);">59.1%</div>
+            </div>
+            <div class="sc-metric-item">
+              <div class="sc-metric-label">Seats in Parliament</div>
+              <div id="sc-parliament" class="sc-metric-value" style="color: var(--violet-vibrant);">34.6%</div>
+            </div>
+            <div class="sc-metric-item">
+              <div class="sc-metric-label">Night Safety (Women)</div>
+              <div id="sc-night-safety" class="sc-metric-value" style="color: var(--teal-vibrant);">42%</div>
+            </div>
+            <div class="sc-metric-item">
+              <div class="sc-metric-label">Legal Protection Score</div>
+              <div id="sc-law-score" class="sc-metric-value" style="color: var(--teal-light);">97.5/100</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive 20-Year Time Slider (Blueprint Act 2) -->
+        <div class="timeline-slider-box">
+          <div class="timeline-header">
+            <div>
+              <span class="spot-tag" style="color: var(--teal-vibrant);">SDG 5 Longitudinal Pulse</span>
+              <h3 style="font-size: 1.35rem; font-weight: 700; margin-top: 0.25rem;">20-Year Progress Timeline (2004 &ndash; 2024)</h3>
+              <p class="stat-subtext">Drag the time slider to witness how gender parity indicators have progressed, stalled, or accelerated.</p>
+            </div>
+            <div class="slider-year-badge">
+              Year: <span id="timeline-year-display">2024</span>
+            </div>
+          </div>
+
+          <div class="timeline-slider-controls">
+            <div class="slider-label-row">
+              <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-main);">Select Milestone Year:</span>
+              <span style="font-size: 0.82rem; color: var(--teal-light); font-weight: 600;">20-Year Retrospective</span>
+            </div>
+            <input type="range" id="sdg-time-slider" class="sdg-slider-input" min="0" max="4" step="1" value="4" aria-label="SDG 5 Timeline Year Slider">
+            <div class="slider-ticks-row">
+              <span>2004</span>
+              <span>2009</span>
+              <span>2014</span>
+              <span>2019</span>
+              <span>2024</span>
+            </div>
+          </div>
+
+          <div id="timeline-note-display" class="timeline-milestone-card">
+            2024 Current Telemetry: Legal protections have climbed to 77.9/100, but evening public safety and equal pay require intensified male allyship.
+          </div>
+
+          <div class="chart-canvas-wrap" style="height: 320px;">
+            <canvas id="chart-timeline-canvas"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         Act 4: Rethinking Stereotypes & Cultural Norms
+         ========================================================================== -->
+    <section id="reflection" class="section-wrapper">
+      <div class="container">
+        <span class="section-badge">Act 4: Cultural Transformation</span>
+        <h2 class="section-title">Rethinking Stereotypes &amp; Cultural Norms</h2>
+        <p class="section-subtitle">
+          Sustainable progress requires dismantling pervasive myths. Click any card to reveal empirical facts and understand why allyship must be active, not performative.
+        </p>
+
+        <!-- 4 Flippable Myth vs. Reality Cards -->
+        <div class="myth-cards-grid">
+          <!-- Card 1 -->
+          <div class="myth-card-container">
+            <div class="myth-card-inner">
+              <div class="myth-card-front">
+                <span class="myth-tag myth-tag-danger">Myth 01</span>
+                <h4 class="myth-title">“Domestic abuse is just a sudden loss of temper or domestic argument.”</h4>
+                <div class="myth-hint">Click or press Enter to flip &amp; reveal fact ↻</div>
+              </div>
+              <div class="myth-card-back">
+                <span class="myth-tag myth-tag-success">The Empirical Reality</span>
+                <p class="myth-back-text">
+                  Domestic abuse is a calculated pattern of coercive control, entitlement, and psychological domination. It is never caused by stress, alcohol, or the victim's behavior.
+                </p>
+                <div class="myth-hint">Refuge &amp; Women's Aid Research</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="myth-card-container">
+            <div class="myth-card-inner">
+              <div class="myth-card-front">
+                <span class="myth-tag myth-tag-danger">Myth 02</span>
+                <h4 class="myth-title">“The gender wage gap is simply women choosing lower-paying career paths.”</h4>
+                <div class="myth-hint">Click or press Enter to flip &amp; reveal fact ↻</div>
+              </div>
+              <div class="myth-card-back">
+                <span class="myth-tag myth-tag-success">The Empirical Reality</span>
+                <p class="myth-back-text">
+                  Even within identical occupations, female professionals face persistent promotion penalties. Unpaid caregiving labor—disproportionately carried by women—remains undervalued.
+                </p>
+                <div class="myth-hint">World Bank &amp; ILO Reports</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="myth-card-container">
+            <div class="myth-card-inner">
+              <div class="myth-card-front">
+                <span class="myth-tag myth-tag-danger">Myth 03</span>
+                <h4 class="myth-title">“Street catcalling is harmless flattery or innocent banter.”</h4>
+                <div class="myth-hint">Click or press Enter to flip &amp; reveal fact ↻</div>
+              </div>
+              <div class="myth-card-back">
+                <span class="myth-tag myth-tag-success">The Empirical Reality</span>
+                <p class="myth-back-text">
+                  Street harassment is an assertion of dominance and violation of autonomy. Over 70% of women report anxiety and restricting their daily movements due to repeated intimidation.
+                </p>
+                <div class="myth-hint">UN Women UK Harassment Study</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="myth-card-container">
+            <div class="myth-card-inner">
+              <div class="myth-card-front">
+                <span class="myth-tag myth-tag-danger">Myth 04</span>
+                <h4 class="myth-title">“Gender equality is only a woman's battle to fight.”</h4>
+                <div class="myth-hint">Click or press Enter to flip &amp; reveal fact ↻</div>
+              </div>
+              <div class="myth-card-back">
+                <span class="myth-tag myth-tag-success">The Empirical Reality</span>
+                <p class="myth-back-text">
+                  Men and boys have vital leverage in eradicating violence by challenging locker-room misogyny, refusing silence, and demanding equitable standards in homes and offices.
+                </p>
+                <div class="myth-hint">White Ribbon Campaign Ethos</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Everyday Allyship Interactive Checklist -->
+        <div class="allyship-pledge-box">
+          <div class="allyship-header">
+            <div>
+              <h3 style="font-size: 1.35rem; font-weight: 700; margin-bottom: 0.25rem;">Everyday Allyship: How Anyone Can Step Up</h3>
+              <p class="stat-subtext">Check the actions you commit to practicing in your daily routine.</p>
+            </div>
+            <div class="ally-score-wrap">
+              <div id="ally-score-text" style="font-weight: 700; font-size: 0.92rem; text-align: right; color: var(--teal-vibrant);">0% Commitment</div>
+              <div class="ally-score-bar-bg">
+                <div id="ally-score-bar" class="ally-score-bar-fill"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ally-checklist">
+            <label class="ally-check-item">
+              <input type="checkbox" class="ally-check-input">
+              <div class="ally-check-content">
+                <h4>Call out casual misogyny and locker-room jokes</h4>
+                <p>Do not remain passive when peers make demeaning comments or share non-consensual media in group chats.</p>
+              </div>
+            </label>
+
+            <label class="ally-check-item">
+              <input type="checkbox" class="ally-check-input">
+              <div class="ally-check-content">
+                <h4>Give space and cross the street at night</h4>
+                <p>When walking behind a woman in the evening, cross to the other side of the road or slow down so you do not impose an intimidating silhouette.</p>
+              </div>
+            </label>
+
+            <label class="ally-check-item">
+              <input type="checkbox" class="ally-check-input">
+              <div class="ally-check-content">
+                <h4>Practice Active Bystander Intervention (The 5 Ds)</h4>
+                <p>Direct, Distract, Delegate, Delay, or Document when witnessing harassment on public transit or sidewalks.</p>
+              </div>
+            </label>
+
+            <label class="ally-check-item">
+              <input type="checkbox" class="ally-check-input">
+              <div class="ally-check-content">
+                <h4>Champion equal pay and salary transparency in your workplace</h4>
+                <p>Support transparent pay audits, mentor junior female colleagues, and advocate for equitable wage bands.</p>
+              </div>
+            </label>
+
+            <label class="ally-check-item">
+              <input type="checkbox" class="ally-check-input">
+              <div class="ally-check-content">
+                <h4>Share the mental load and domestic responsibilities</h4>
+                <p>Proactively manage household planning, childcare, and elderly support rather than waiting to be delegated to.</p>
+              </div>
+            </label>
+          </div>
+
+          <div id="ally-feedback-text" class="ally-feedback-alert">
+            🌱 The Journey Begins: Small conscious shifts in everyday habits create safer public spaces for everyone.
+          </div>
+        </div>
+
+        <!-- Interactive Allyship Assessment Prompt Tool (Blueprint Act 3) -->
+        <div id="allyship-assessment-container">
+          <!-- Dynamically populated by allyship-assessment.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         Act 5: Emergency Helplines & The 3D Mobile Phone Showcase
+         ========================================================================== -->
+    <section id="emergency-helplines" class="section-wrapper">
+      <div class="container">
+        <span class="section-badge">Act 5: Immediate Support</span>
+        <h2 class="section-title">Emergency Helplines: Lifelines Within Reach</h2>
+        <p class="section-subtitle">
+          Free, anonymous, and confidential support is available 24/7. Interact with the 3D mobile phone below to test dialing emergency helplines and access immediate crisis numbers.
+        </p>
+
+        <!-- 3D Phone Showcase Box -->
+        <div class="helpline-showcase-box">
+          <div class="helpline-layout">
+            <div id="phone-canvas-container">
+              <div id="phone-loader-status" class="canvas-loader-overlay">
+                <div class="canvas-loader-spinner"></div>
+                <div class="canvas-loader-text">Loading 3D Phone Model (<span id="phone-loader-pct">0%</span>)...</div>
+              </div>
+              <!-- Three.js Phone GLB Model Injected Here -->
+            </div>
+
+            <div class="phone-info-panel">
+              <div>
+                <span class="spot-tag" style="color: var(--teal-vibrant);">24/7 Crisis Hotline Interface</span>
+                <h3 style="font-size: 1.45rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.5rem;">Interactive Emergency Phone</h3>
+                <p class="stat-subtext" style="margin-bottom: 1rem;">
+                  Select any helpline below to illuminate the 3D phone screen, trigger secure dialing simulation, and review verified contact protocols.
+                </p>
+
+                <!-- Helpline Selector Pills -->
+                <div class="helpline-selector-grid">
+                  <button class="helpline-selector-pill active" data-helpline-id="uk-refuge">
+                    <strong>Refuge (UK)</strong>
+                    0808 2000 247
+                  </button>
+                  <button class="helpline-selector-pill" data-helpline-id="us-rainn">
+                    <strong>RAINN (US)</strong>
+                    1-800-656-4673
+                  </button>
+                  <button class="helpline-selector-pill" data-helpline-id="us-dv">
+                    <strong>The Hotline (US)</strong>
+                    1-800-799-7233
+                  </button>
+                  <button class="helpline-selector-pill" data-helpline-id="global-999">
+                    <strong>Direct Police</strong>
+                    999 / 911 / 112
+                  </button>
+                  <button class="helpline-selector-pill" data-helpline-id="silent-55">
+                    <strong>Silent Solution</strong>
+                    Dial 999 &gt; 55
+                  </button>
+                  <button class="helpline-selector-pill" data-helpline-id="text-shout">
+                    <strong>Crisis Text</strong>
+                    Text 85258
+                  </button>
+                </div>
+
+                <!-- Active Helpline Card Display -->
+                <div class="phone-active-card">
+                  <div id="phone-active-org" class="stat-subtext" style="color: var(--teal-light); font-weight: 700;">Refuge (Freephone 24/7) &bull; United Kingdom</div>
+                  <div id="phone-active-title" style="font-size: 1.15rem; font-weight: 700; color: var(--text-main);">UK National Domestic Abuse Helpline</div>
+                  <div id="phone-active-num" class="phone-active-num">0808 2000 247</div>
+                  <p id="phone-active-desc" class="stat-subtext" style="margin-bottom: 0;">
+                    Free, confidential, trauma-informed support for women and children 24 hours a day, 365 days a year.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Action Triggers -->
+              <div class="phone-actions-row">
+                <a id="btn-phone-call-action" href="tel:08082000247" class="btn-phone-call">
+                  <span class="icon">📞</span> Call 0808 2000 247
+                </a>
+                <button id="btn-phone-copy-action" class="btn-phone-copy">
+                  <span class="icon">📋</span> Copy Number
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         Act 6: Verified Charities & Taking Action
+         ========================================================================== -->
+    <section id="take-action" class="section-wrapper">
+      <div class="container">
+        <span class="section-badge">Act 6: Tangible Action</span>
+        <h2 class="section-title">Support Organisations Making a Real Difference</h2>
+        <p class="section-subtitle">
+          Direct connections to verified international NGOs, domestic abuse charities, and grassroots legal defense networks.
+        </p>
+
+        <!-- Category Filter Tabs -->
+        <div class="charity-filters-row">
+          <button class="charity-filter-btn active" data-category="all">All Organizations</button>
+          <button class="charity-filter-btn" data-category="crisis">Crisis &amp; Shelters</button>
+          <button class="charity-filter-btn" data-category="men">Men as Allies</button>
+          <button class="charity-filter-btn" data-category="legal">Legal &amp; Systemic Rights</button>
+          <button class="charity-filter-btn" data-category="global">Global Parity</button>
+        </div>
+
+        <!-- Charities Grid -->
+        <div class="charities-grid">
+          <!-- Refuge (UK) -->
+          <div class="charity-card" data-category="crisis">
+            <div class="charity-top">
+              <span class="charity-badge">UK Shelter &amp; Crisis</span>
+              <h4 class="charity-name">Refuge (UK)</h4>
+              <p class="charity-desc">
+                The UK's largest specialist domestic abuse organization, operating emergency accommodations and the Freephone 24-Hour National Domestic Abuse Helpline.
+              </p>
+            </div>
+            <div class="charity-links">
+              <a href="https://www.refuge.org.uk" target="_blank" rel="noopener noreferrer" class="btn-charity">Visit Refuge</a>
+              <a href="https://www.refuge.org.uk/make-a-donation/" target="_blank" rel="noopener noreferrer" class="btn-charity" style="background: var(--teal-primary); color: #031013;">Donate</a>
+            </div>
+          </div>
+
+          <!-- Women's Aid -->
+          <div class="charity-card" data-category="crisis">
+            <div class="charity-top">
+              <span class="charity-badge">Survivor Advocacy</span>
+              <h4 class="charity-name">Women's Aid</h4>
+              <p class="charity-desc">
+                A grassroots federation working to end domestic abuse against women and children, providing frontline life-saving shelters, live chat support, and community advocacy.
+              </p>
+            </div>
+            <div class="charity-links">
+              <a href="https://www.womensaid.org.uk" target="_blank" rel="noopener noreferrer" class="btn-charity">Visit Women's Aid</a>
+              <a href="https://www.womensaid.org.uk/donate/" target="_blank" rel="noopener noreferrer" class="btn-charity" style="background: var(--teal-primary); color: #031013;">Donate</a>
+            </div>
+          </div>
+
+          <!-- UN Women -->
+          <div class="charity-card" data-category="global">
+            <div class="charity-top">
+              <span class="charity-badge">United Nations Entity</span>
+              <h4 class="charity-name">UN Women</h4>
+              <p class="charity-desc">
+                The global champion for gender equality, driving intergovernmental policies, international economic empowerment programs, and SDG 5 monitoring across 190+ nations.
+              </p>
+            </div>
+            <div class="charity-links">
+              <a href="https://www.unwomen.org" target="_blank" rel="noopener noreferrer" class="btn-charity">Visit UN Women</a>
+              <a href="https://donate.unwomen.org" target="_blank" rel="noopener noreferrer" class="btn-charity" style="background: var(--teal-primary); color: #031013;">Donate</a>
+            </div>
+          </div>
+
+          <!-- White Ribbon -->
+          <div class="charity-card" data-category="men">
+            <div class="charity-top">
+              <span class="charity-badge">Men &amp; Boys Allyship</span>
+              <h4 class="charity-name">White Ribbon Campaign</h4>
+              <p class="charity-desc">
+                The international movement of men and boys working to end violence against women and girls by promoting positive masculinity, active bystander education, and workplace pledges.
+              </p>
+            </div>
+            <div class="charity-links">
+              <a href="https://www.whiteribbon.org.uk" target="_blank" rel="noopener noreferrer" class="btn-charity">Take the Pledge</a>
+              <a href="https://www.whiteribbon.org.uk/donate" target="_blank" rel="noopener noreferrer" class="btn-charity" style="background: var(--teal-primary); color: #031013;">Support</a>
+            </div>
+          </div>
+
+          <!-- Equality Now -->
+          <div class="charity-card" data-category="legal">
+            <div class="charity-top">
+              <span class="charity-badge">International Legal Rights</span>
+              <h4 class="charity-name">Equality Now</h4>
+              <p class="charity-desc">
+                Using legal mechanisms to dismantle sex-discriminatory statutes, end child marriage, eliminate female genital mutilation, and defend survivors of sexual violence.
+              </p>
+            </div>
+            <div class="charity-links">
+              <a href="https://www.equalitynow.org" target="_blank" rel="noopener noreferrer" class="btn-charity">View Legal Actions</a>
+              <a href="https://www.equalitynow.org/donate/" target="_blank" rel="noopener noreferrer" class="btn-charity" style="background: var(--teal-primary); color: #031013;">Donate</a>
+            </div>
+          </div>
+
+          <!-- RAINN -->
+          <div class="charity-card" data-category="crisis">
+            <div class="charity-top">
+              <span class="charity-badge">Anti-Sexual Violence</span>
+              <h4 class="charity-name">RAINN</h4>
+              <p class="charity-desc">
+                The largest anti-sexual violence organization in North America, operating the National Sexual Assault Hotline and advocating for survivor justice in legal and medical systems.
+              </p>
+            </div>
+            <div class="charity-links">
+              <a href="https://www.rainn.org" target="_blank" rel="noopener noreferrer" class="btn-charity">Get Support</a>
+              <a href="https://donate.rainn.org" target="_blank" rel="noopener noreferrer" class="btn-charity" style="background: var(--teal-primary); color: #031013;">Donate</a>
+            </div>
+          </div>
+
+          <!-- Malala Fund -->
+          <div class="charity-card" data-category="global">
+            <div class="charity-top">
+              <span class="charity-badge">Girls' Education &amp; Rights</span>
+              <h4 class="charity-name">Malala Fund</h4>
+              <p class="charity-desc">
+                Founded by Nobel laureate Malala Yousafzai, championing every girl's right to 12 years of free, safe, quality education through grassroots activists and global policy reform.
+              </p>
+            </div>
+            <div class="charity-links">
+              <a href="https://malala.org" target="_blank" rel="noopener noreferrer" class="btn-charity">Visit Malala Fund</a>
+              <a href="https://malala.org/donate" target="_blank" rel="noopener noreferrer" class="btn-charity" style="background: var(--teal-primary); color: #031013;">Donate</a>
+            </div>
+          </div>
+
+          <!-- Global Fund for Women -->
+          <div class="charity-card" data-category="legal">
+            <div class="charity-top">
+              <span class="charity-badge">Grassroots Feminist Movements</span>
+              <h4 class="charity-name">Global Fund for Women</h4>
+              <p class="charity-desc">
+                Directly funding bold, feminist grassroots organizations worldwide to end sexual and domestic violence, secure bodily autonomy, and advance female economic leadership.
+              </p>
+            </div>
+            <div class="charity-links">
+              <a href="https://www.globalfundforwomen.org" target="_blank" rel="noopener noreferrer" class="btn-charity">Explore Grants</a>
+              <a href="https://www.globalfundforwomen.org/donate/" target="_blank" rel="noopener noreferrer" class="btn-charity" style="background: var(--teal-primary); color: #031013;">Donate</a>
+            </div>
+          </div>
+
+          <!-- Womankind Worldwide -->
+          <div class="charity-card" data-category="legal">
+            <div class="charity-top">
+              <span class="charity-badge">Global Women's Rights</span>
+              <h4 class="charity-name">Womankind Worldwide</h4>
+              <p class="charity-desc">
+                Partnering with women's rights organizations across Africa and Asia to defend survivors, challenge discriminatory legal frameworks, and support grassroots female entrepreneurs.
+              </p>
+            </div>
+            <div class="charity-links">
+              <a href="https://www.womankind.org.uk" target="_blank" rel="noopener noreferrer" class="btn-charity">View Campaigns</a>
+              <a href="https://www.womankind.org.uk/donate/" target="_blank" rel="noopener noreferrer" class="btn-charity" style="background: var(--teal-primary); color: #031013;">Donate</a>
+            </div>
+          </div>
+
+          <!-- MenEngage Alliance -->
+          <div class="charity-card" data-category="men">
+            <div class="charity-top">
+              <span class="charity-badge">Men &amp; Boys Allyship</span>
+              <h4 class="charity-name">MenEngage Alliance</h4>
+              <p class="charity-desc">
+                A global coalition of hundreds of NGOs and UN partners engaging men and boys in gender justice, dismantling toxic masculinity, and sharing domestic caregiving responsibilities.
+              </p>
+            </div>
+            <div class="charity-links">
+              <a href="https://menengage.org" target="_blank" rel="noopener noreferrer" class="btn-charity">Join Alliance</a>
+              <a href="https://menengage.org/take-action/" target="_blank" rel="noopener noreferrer" class="btn-charity" style="background: var(--teal-primary); color: #031013;">Support</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       Site Footer
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-copy">
+          <div class="brand-title" style="margin-bottom: 0.5rem;">Beyond the <span>Shadows</span></div>
+          <p>
+            An educational, data-driven initiative in support of <strong>United Nations Sustainable Development Goal 5 (Gender Equality)</strong>. 
+            Crafted for all who believe that safety, dignity, and equality are universal human rights.
+          </p>
+        </div>
+        <div class="footer-links">
+          <a href="#hero">Back to Top ↑</a>
+          <a href="https://sdgs.un.org/goals/goal5" target="_blank" rel="noopener noreferrer">UN SDG 5 Official Portal</a>
+          <button class="js-quick-exit" style="background:none; border:none; color: var(--coral-alert); font-weight:700; cursor:pointer; text-align:left; padding:0;">Emergency Quick Exit (Hide Page)</button>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 UN SDG 5 Interactive Platform &bull; Teal Ribbon for Sexual Assault Survivor Solidarity &bull; Data sources: UN Statistics Division, The World Bank, WHO, and UK Parliament.</p>
+      </div>
+    </div>
   </footer>
 
-  <!-- Scripts: Local with CDN fallback -->
+  <!-- Core JavaScript Libraries from libs/ -->
   <script src="libs/three.min.js"></script>
-  <script src="libs/GLTFLoader.js"></script>
   <script src="libs/OrbitControls.js"></script>
+  <script src="libs/GLTFLoader.js"></script>
   <script src="libs/gsap.min.js"></script>
-  <script src="libs/ScrollTrigger.min.js"></script>
+  <script src="libs/chart.umd.min.js"></script>
   <script src="libs/canvas-confetti.min.js"></script>
-  
-  <!-- Main Application Script -->
+
+  <!-- Procedural Sound FX & Data Services -->
+  <script src="sound-fx.js"></script>
+  <script src="data-service.js"></script>
+
+  <!-- 3D Interactive Model Visualizers -->
+  <script src="flower3d.js"></script>
+  <script src="earth3d.js"></script>
+  <script src="phone3d.js"></script>
+  <script src="maze3d.js"></script>
+
+  <!-- Data Analytics, Interactive Assessment & Master Application Controller -->
+  <script src="charts-app.js"></script>
+  <script src="allyship-assessment.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

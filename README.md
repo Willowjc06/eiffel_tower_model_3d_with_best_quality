@@ -1,52 +1,132 @@
-# La Tour Mystique — 3D Interactive Web Experience
-
-A luxury 3D interactive website celebrating the **Eiffel Tower**, built strictly according to the **Product Requirement Document (PRD)**.
+# Beyond the Shadows: Global Gender Equality & Everyday Safety 🌍💜
+> **United Nations Sustainable Development Goal 5 (SDG 5) Interactive Web Platform**  
+> Dedicated to eradicating gender-based violence, bridging the global pay gap, and fostering everyday allyship.
 
 ---
 
-## 🌟 Quick Launch
+## 🌟 Vision & Ethos
+> *"The fight for equality should never lie solely upon a woman."*
 
-### Option 1: Double-Click (Easiest)
-Double-click **`start-server.bat`** in this folder, then open your browser to:
-👉 **[http://localhost:8080/](http://localhost:8080/)**
+**Beyond the Shadows** is an interactive, educational, and action-oriented digital platform created to address United Nations Sustainable Development Goal 5: **Gender Equality**. 
 
-### Option 2: PowerShell
-Run the included PowerShell static web server:
+The platform merges two complementary creative paradigms:
+1. **The Artistic & Narrative Immersion of *Why Zero*:** Through interactive 3D WebGL scenes in **Three.js**, the site communicates the emotional reality of everyday street safety, hypervigilance, and systemic barriers.
+2. **The Empirical Authority of *Our World in Data*:** Through **Chart.js** and live REST APIs (**World Bank Open Data**, **UN SDG Indicators**, and the **World Health Organisation**), the site demonstrates that gender discrimination is an undeniable, global crisis requiring immediate collective action.
+
+---
+
+## 🎯 Key Features & Capabilities
+
+### 1. Dual Three.js 3D Visualisations (Why Zero Inspired)
+- **Interactive 3D Global Earth (Hero Anchor)**:
+  - A realistic 3D Earth globe with topological beacons, glowing atmospheric shaders, and pulsing coordinate beacons.
+  - Interactive hotspots for the UK & Europe, North America, Sub-Saharan Africa, South Asia, Latin America, East Asia, and Oceania.
+  - Smooth camera orbit transitions, localized hotline info, and regional statistics.
+- **The Everyday Maze & Night Walk (Micro-Narrative)**:
+  - An isometric, low-poly 3D urban pathway depicting the constant risk calculations, detours, and "corners women must cut" when walking home after dark.
+  - **Interactive Branching Decision at Stage 3**: Choose between **Option A: The Well-Lit Main Road (+20 min detour)** and **Option B: The Shortcut (Unlit Alleyway)**, demonstrating the invisible time tax women pay to stay safe.
+  - Features Lillian Greenwood’s parliamentary address on the personal safety worries of women and girls in Liverpool.
+  - Procedural footstep audio synthesis via the **Web Audio API** (toggleable, zero external dependencies).
+- **3D Hydrangea Purple Flower Centerpiece**:
+  - The enduring purple hydrangea—a symbol of resilience, survivor solidarity, and healing.
+- **3D Mobile Phone Hotline Interface**:
+  - Interactive 3D smartphone simulator with real-time screen canvas updates to test crisis dialing protocols.
+
+### 2. Live API Telemetry & Empirical Visualizations (Our World in Data Inspired)
+- **Live World Bank Open Data & UN SDG Indicators API**:
+  - Connects to World Bank indicator feeds (`SG.GEN.PARL.ZS`, `SL.TLF.CACT.FE.ZS`, `SG.VAW.1549.ZS`, `SG.LAW.INDX`) and UN SDG Targets (`5.1.1`, `5.2.1`, `5.5.1`).
+  - **Resilient Cache-First / Fallback Strategy**: 24-hour `localStorage` caching combined with bundled offline snapshot JSON files in `data/`, ensuring 100% operational reliability even offline or under API rate limits.
+- **5 Autoritative Chart.js Visualizations**:
+  - **The 1 in 3 Crisis:** Stacked bar chart breaking down lifetime physical/sexual intimate partner violence vs. non-partner sexual violence.
+  - **Economic Parity & Leadership Disparity:** Comparative analysis of wage gaps vs. female labor force participation vs. parliamentary seats.
+  - **Night Safety Perception Divide:** Graphic contrast between how safe men vs. women feel walking alone after dark in their communities.
+  - **Safety & Justice Index:** World Bank Women, Business & the Law Score (0-100) vs. Female Night Safety Perceptions.
+  - **20-Year Longitudinal Time Slider (2004–2024):** Interactive range slider and line trend chart visualizing whether indicators have improved, stagnated, or regressed over two decades.
+  - **Interactive Country Explorer:** Benchmarking scorecard across 14+ benchmark nations.
+
+### 3. Education & Changing Behaviour ("Rethinking Stereotypes")
+- **3D Flippable Myth vs. Reality Cards:**
+  - Interactive cards that debunk societal myths surrounding domestic abuse, wage gaps, catcalling, and allyship responsibilities.
+- **Interactive Allyship Assessment Prompt Tool:**
+  - Non-judgmental interactive scenario prompt tool covering group chat dynamics, nighttime walking etiquette, workplace idea attribution, and public transit harassment.
+  - Provides instant constructive advice and active bystander intervention education (**The 5 Ds: Direct, Distract, Delegate, Delay, Document**).
+- **Everyday Allyship Commitment Checklist:**
+  - Actionable commitments for men and community members with dynamic percentage bar and celebration feedback.
+
+### 4. Verified Charities & Emergency Hotlines
+- Filterable directory connecting users directly to verified organizations:
+  - **UN Women** — Global intergovernmental policy & monitoring.
+  - **Refuge (UK)** — Emergency accommodation & 24/7 Helpline.
+  - **Women’s Aid** — Grassroots survivor support & education.
+  - **White Ribbon UK & Global** — Engaging men and boys to end violence.
+  - **Equality Now** — International legal advocacy.
+  - **RAINN** — Anti-sexual violence support.
+  - **Malala Fund** — Girls' education and youth advocacy.
+  - **Global Fund for Women** — Direct funding for feminist grassroots movements.
+  - **Womankind Worldwide** — Defending survivors & lobbying against discrimination.
+  - **MenEngage Alliance** — Mobilizing men and boys for gender justice.
+- 24/7 emergency hotline directory for UK, US, and international services.
+
+### 5. Trauma-Informed Safety, Ethics & Accessibility
+- **Instant Quick Exit Button & [ESC] Shortcut:**
+  - Persistent, high-visibility button that instantly clears session history and replaces the tab with BBC Weather.
+- **Mindful Content Warning (Trigger Warning):**
+  - Respectful, subtle banner giving visitors agency over sensitive content with immediate lifeline links.
+- **WCAG 2.1 AA Compliance & Reduced-Motion Accessibility:**
+  - High-contrast, colorblind-friendly color palettes (vibrant coral `#FF4B4B`, deep violet `#a855f7`, survivor teal `#14b8a6`, stark white `#ffffff`).
+  - Supports `prefers-reduced-motion` and includes a dedicated header toggle to pause 3D rotations and animations.
+
+---
+
+## 🚀 How to Run the Website
+
+### Option 1: Direct Browser Launch
+Simply double-click or open **`index.html`** in any modern web browser (Google Chrome, Microsoft Edge, Firefox, Safari).
+
+### Option 2: Local Static Server
+If you wish to serve the site locally via HTTP:
 ```powershell
-powershell -ExecutionPolicy Bypass -File serve.ps1 8080
+# In PowerShell:
+powershell -ExecutionPolicy Bypass -File .\serve.ps1
 ```
-Then navigate to `http://localhost:8080/` in Chrome, Edge, Firefox, or Safari.
+Or double-click **`start-server.bat`**, then open `http://localhost:8080` in your web browser.
 
 ---
 
-## 🎨 Implementation of the PRD Requirements
-
-| PRD Section | Requirement | Implementation in Website |
-|---|---|---|
-| **O1 & O4** | 3D Object & Call to Action: "How to steal the Eiffel tower" | 3D model of the Eiffel Tower (`scene.gltf` + `scene.bin`) integrated with Three.js, glowing aura, and the complete heist masterplan narrative. |
-| **O2 & I3** | Shape & Repetition | Triangular silhouette highlighted with mathematical metrics (18,038 puddle iron elements, 2.5M rivets). The tower spins in place while glowing with golden specs. |
-| **O3 & I4** | Height & Summit Viewing Platform | Camera smoothly pans up 330m to the Summit Observation Deck. Interactive buttons let you view the Base, 1st Floor, 2nd Floor, and Summit. |
-| **O3 & I5** | Material Realism & Puddle Iron | Macro camera zoom brings you close to the iron lattice, rivets, and metallic sheen with dynamic specular lighting. |
-| **I1** | Typography & Color Scheme | Serif, elegant typography in italics (*Playfair Display*, *Cinzel*). Color palette features the **French Tricolor** (Bleu, Blanc, Rouge) with glowing gold specs. |
-| **I2** | Launch View | Opens with a horizontal view of the tower, slow continuous spin, black obsidian background, and an ethereal golden glowing aura. |
-| **I6** | French Flag Transition & Heist Dossier | Scrolling down transitions the ambient lighting and background to French flag colors while detailing the 4-step plan to steal the tower. |
-| **I6** | Buying & Throwing the Special Orb | Interactive modal to "Acquire Special Compression Orb". Once armed, click or drag the orb to launch it at the tower; on impact, fireworks burst and the tower shrinks into pocket size (12 cm)! |
-| **I6** | Miniature Glow & Monumental Re-enlargement | Continuing to scroll reveals the miniature tower glowing with gold. Triggering the restoration dynamically enlarges the monument back to its full majesty with golden rays and fanfare. |
+## 📁 Project File Structure
+```
+├── index.html                   # Main semantic HTML5 webpage structure
+├── style.css                    # Modern dark editorial CSS with responsive layouts & animations
+├── app.js                       # Master application controller, quick exit, and UI orchestration
+├── data-service.js              # Live API client (World Bank & UN SDG) with offline caching
+├── charts-app.js                # Chart.js analytics engine & 20-year time slider
+├── allyship-assessment.js       # Interactive scenario prompt tool & 5 Ds bystander guide
+├── earth3d.js                   # Interactive 3D Earth Globe built with Three.js
+├── maze3d.js                    # Interactive 3D Night Walk / Labyrinth with branching choices
+├── flower3d.js                  # 3D Purple Hydrangea symbol of healing & survivor resilience
+├── phone3d.js                   # 3D Mobile Phone with dynamic helpline dialing simulation
+├── sound-fx.js                  # Procedural Web Audio API sound generator
+├── serve.ps1                    # Static local PowerShell HTTP server
+├── start-server.bat             # Windows batch launch script
+├── data/                        # Bundled offline snapshot JSON datasets
+│   ├── worldbank_gender_snapshot.json
+│   ├── un_sdg5_snapshot.json
+│   ├── who_violence_snapshot.json
+│   └── timeline_sdg5.json
+└── libs/
+    ├── three.min.js             # Three.js 3D library
+    ├── OrbitControls.js         # Three.js camera controls
+    ├── GLTFLoader.js            # Three.js GLTF/GLB loader
+    ├── gsap.min.js              # GSAP animation library
+    ├── chart.umd.min.js         # Chart.js library
+    └── canvas-confetti.min.js   # Confetti particle engine
+```
 
 ---
 
-## 🕹️ Interactive Features
-
-- **Story Mode**: Scroll smoothly to travel through all narrative chapters and camera angles.
-- **Free 3D Orbit Mode**: Click the **"3D Orbit"** button in the floating HUD at the bottom right to freely rotate, zoom, and inspect every angle of the tower.
-- **Audio Experience**: Toggle the **Audio** button in the navigation bar to enable synthesized atmospheric chimes, whooshes, warp shrink tones, and golden fanfare chords (zero external sound files needed).
-- **Scale Slider**: Use the slider in the Finale section to scale the Eiffel Tower smoothly between Pocket Size (0.1x) and Colossal Monument (1.5x).
-
----
-
-## 📜 3D Model Credit & License
-
-- **Title**: Eiffel Tower model 3D with best quality
-- **Source**: [Sketchfab](https://sketchfab.com/3d-models/eiffel-tower-model-3d-with-best-quality-c3391c293e70471e9a112f7855adcf2f)
-- **Author**: [shatlykxfree](https://sketchfab.com/shatlykxfree)
-- **License**: CC-BY-4.0 (Creative Commons Attribution 4.0 International)
+## 📜 Academic & Data Citations
+1. **United Nations (2023–2024):** *Sustainable Development Goal 5: Achieve gender equality and empower all women and girls.* UN Statistics Division (`https://unstats.un.org/SDGAPI/v1/sdg/Goal/5/Target/Data`).
+2. **World Health Organization (2023):** *Violence against women prevalence estimates, 2018.* Global Health Observatory (`https://ghoapi.azureedge.net/api/VIOLENCE_IPV_LIFETIME`).
+3. **UK Government & Lillian Greenwood (2023):** *Ministerial address on women and girls' safety and transport mobility in Liverpool.*
+4. **The World Bank (2024):** *Women, Business and the Law & Gender Data Portal* (`SG.GEN.PARL.ZS`, `SL.TLF.CACT.FE.ZS`, `SG.VAW.1549.ZS`, `SG.LAW.INDX`).
+5. **Gallup World Poll & UK Office for National Statistics (ONS):** *Perceptions of personal safety walking alone after dark.*

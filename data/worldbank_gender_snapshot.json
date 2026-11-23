@@ -1,0 +1,87 @@
+{
+  "source": "World Bank Gender Statistics API",
+  "endpoint": "https://api.worldbank.org/v2/country/all/indicator/{INDICATOR}?format=json",
+  "lastSynced": "2026-11-23T12:00:00Z",
+  "indicators": {
+    "SG.GEN.PARL.ZS": {
+      "name": "Proportion of seats held by women in national parliaments (%)",
+      "values": {
+        "WLD": 26.9,
+        "GBR": 34.6,
+        "USA": 28.7,
+        "DEU": 35.3,
+        "FRA": 37.8,
+        "SWE": 46.7,
+        "NOR": 45.0,
+        "RWA": 61.3,
+        "ZAF": 46.3,
+        "BRA": 17.5,
+        "IND": 15.2,
+        "KEN": 23.3,
+        "JPN": 15.7,
+        "KOR": 19.0,
+        "AUS": 38.4
+      }
+    },
+    "SL.TLF.CACT.FE.ZS": {
+      "name": "Labor force participation rate, female (% of female population ages 15+)",
+      "values": {
+        "WLD": 47.3,
+        "GBR": 59.1,
+        "USA": 56.8,
+        "DEU": 57.2,
+        "FRA": 52.9,
+        "SWE": 69.8,
+        "NOR": 66.5,
+        "RWA": 80.4,
+        "ZAF": 48.0,
+        "BRA": 53.4,
+        "IND": 32.8,
+        "KEN": 68.3,
+        "JPN": 54.8,
+        "KOR": 55.2,
+        "AUS": 62.1
+      }
+    },
+    "SG.VAW.1549.ZS": {
+      "name": "Proportion of women subjected to physical/sexual violence in the last 12 months (%)",
+      "values": {
+        "WLD": 13.0,
+        "GBR": 5.4,
+        "USA": 6.8,
+        "DEU": 4.9,
+        "FRA": 5.8,
+        "SWE": 4.1,
+        "NOR": 3.8,
+        "RWA": 18.2,
+        "ZAF": 21.0,
+        "BRA": 14.5,
+        "IND": 22.1,
+        "KEN": 20.4,
+        "JPN": 4.2,
+        "KOR": 5.1,
+        "AUS": 4.7
+      }
+    },
+    "SG.LAW.INDX": {
+      "name": "Women, Business and the Law Index Score (0-100)",
+      "values": {
+        "WLD": 77.9,
+        "GBR": 97.5,
+        "USA": 91.3,
+        "DEU": 100.0,
+        "FRA": 100.0,
+        "SWE": 100.0,
+        "NOR": 96.9,
+        "RWA": 80.6,
+        "ZAF": 88.1,
+        "BRA": 85.0,
+        "IND": 74.4,
+        "KEN": 80.6,
+        "JPN": 78.8,
+        "KOR": 85.0,
+        "AUS": 96.9
+      }
+    }
+  }
+}

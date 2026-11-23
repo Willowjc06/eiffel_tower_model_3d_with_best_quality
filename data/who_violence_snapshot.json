@@ -1,0 +1,77 @@
+{
+  "source": "WHO Global Health Observatory (GHO) OData API",
+  "endpoint": "https://ghoapi.azureedge.net/api/VIOLENCE_IPV_LIFETIME",
+  "indicator": "Lifetime prevalence of intimate partner violence and non-partner sexual violence among women aged 15-49",
+  "lastSynced": "2026-11-23T12:00:00Z",
+  "globalTotal": {
+    "lifetimeCombined": 31.8,
+    "lifetimeIntimatePartner": 27.0,
+    "lifetimeNonPartnerSexual": 7.0
+  },
+  "regions": [
+    {
+      "code": "WPR_OCE",
+      "region": "Oceania (excluding Aus/NZ)",
+      "intimatePartnerRate": 51.0,
+      "nonPartnerRate": 12.0,
+      "combinedRate": 53.0,
+      "legalProtectionScore": 42
+    },
+    {
+      "code": "AFR_SSA",
+      "region": "Sub-Saharan Africa",
+      "intimatePartnerRate": 33.0,
+      "nonPartnerRate": 9.5,
+      "combinedRate": 36.5,
+      "legalProtectionScore": 58
+    },
+    {
+      "code": "SEAR_SAS",
+      "region": "South Asia",
+      "intimatePartnerRate": 35.0,
+      "nonPartnerRate": 6.8,
+      "combinedRate": 37.0,
+      "legalProtectionScore": 62
+    },
+    {
+      "code": "AMR_LAC",
+      "region": "Latin America & Caribbean",
+      "intimatePartnerRate": 25.0,
+      "nonPartnerRate": 8.0,
+      "combinedRate": 29.8,
+      "legalProtectionScore": 76
+    },
+    {
+      "code": "EMR_MENA",
+      "region": "Middle East & North Africa",
+      "intimatePartnerRate": 31.0,
+      "nonPartnerRate": 5.2,
+      "combinedRate": 32.5,
+      "legalProtectionScore": 48
+    },
+    {
+      "code": "AMR_NA",
+      "region": "Northern America",
+      "intimatePartnerRate": 25.0,
+      "nonPartnerRate": 14.2,
+      "combinedRate": 32.0,
+      "legalProtectionScore": 88
+    },
+    {
+      "code": "EUR",
+      "region": "Europe & Central Asia",
+      "intimatePartnerRate": 22.0,
+      "nonPartnerRate": 9.0,
+      "combinedRate": 26.5,
+      "legalProtectionScore": 92
+    },
+    {
+      "code": "WPR_EA",
+      "region": "East Asia & Pacific",
+      "intimatePartnerRate": 20.0,
+      "nonPartnerRate": 4.5,
+      "combinedRate": 22.4,
+      "legalProtectionScore": 79
+    }
+  ]
+}

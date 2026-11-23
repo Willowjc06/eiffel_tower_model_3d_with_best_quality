@@ -1,0 +1,11 @@
+# Dependencies & OS files
+.DS_Store
+Thumbs.db
+*.log
+
+# VS Code directory
+.vscode/
+
+# Eiffel Tower legacy 3D assets (if not needed in flood repo)
+# scene.bin
+# scene.gltf
