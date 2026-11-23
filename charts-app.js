@@ -1,12 +1,10 @@
 /**
  * charts-app.js
  * Chart.js Visualizations for UN SDG 5 Data.
- * Updated according to the Blueprint specifications:
- * - The 1 in 3 Crisis: Lifetime Intimate Partner vs Non-Partner Sexual Violence breakdown
- * - The Gender Pay & Opportunity Gap: Wage gap, female labor force, parliamentary representation
- * - Safety & Justice Index: Legal protections vs Reporting & Night Safety
- * - Interactive 20-Year Time Slider (2004 - 2024)
- * - Accessible high-contrast color coding: Vibrant Coral (#FF4B4B), Deep Violet (#a855f7), Survivor Teal (#14b8a6), Stark White (#ffffff)
+ * Elevated with Survivor Colours:
+ * - Teal: The International Ribbon for Sexual Assault Awareness & Survivor Solidarity (#14b8a6 / #2dd4bf)
+ * - Purple: The International Ribbon for Domestic Violence Healing & Dignity (#8b5cf6 / #a855f7 / #c084fc)
+ * Inspired by Our World in Data and why.zero.university editorial aesthetics.
  */
 
 const ChartsApp = (function () {
@@ -18,26 +16,29 @@ const ChartsApp = (function () {
   let timelineChartInstance = null;
   let justiceChartInstance = null;
 
-  // Accessible color palette specified by blueprint (No stereotypical pinks, bold urgent tones)
+  // Survivor Teal & Hydrangea Purple Dual Palette
   const PALETTE = {
-    coralUrgent: '#FF4B4B',
-    coralAlpha: 'rgba(255, 75, 75, 0.35)',
-
-    violetDeep: '#7c3aed',
-    violetVibrant: '#a855f7',
-    violetLight: '#c084fc',
-    violetAlpha: 'rgba(168, 85, 247, 0.35)',
-
     tealPrimary: '#14b8a6',
     tealVibrant: '#2dd4bf',
     tealLight: '#5eead4',
     tealDark: '#0f766e',
     tealAlpha: 'rgba(20, 184, 166, 0.35)',
+    tealGlow: 'rgba(45, 212, 191, 0.45)',
+
+    purplePrimary: '#8b5cf6',
+    purpleVibrant: '#a855f7',
+    purpleLight: '#c084fc',
+    purpleDeep: '#4c1d95',
+    purpleAlpha: 'rgba(168, 85, 247, 0.35)',
+    purpleGlow: 'rgba(192, 132, 252, 0.45)',
+
+    coralUrgent: '#fb7185',
+    coralAlpha: 'rgba(251, 113, 133, 0.3)',
 
     starkWhite: '#ffffff',
     whiteAlpha: 'rgba(255, 255, 255, 0.35)',
 
-    darkGrid: 'rgba(45, 212, 191, 0.1)',
+    darkGrid: 'rgba(45, 212, 191, 0.08)',
     textLight: '#f0fdfa',
     textMuted: '#94a3b8'
   };
@@ -48,18 +49,18 @@ const ChartsApp = (function () {
     Chart.defaults.color = PALETTE.textMuted;
     Chart.defaults.font.family = "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
     Chart.defaults.font.size = 12;
-    Chart.defaults.plugins.tooltip.backgroundColor = '#031a1e';
+    Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(4, 16, 21, 0.95)';
     Chart.defaults.plugins.tooltip.titleColor = PALETTE.tealVibrant;
     Chart.defaults.plugins.tooltip.bodyColor = '#f0fdfa';
-    Chart.defaults.plugins.tooltip.borderColor = 'rgba(45, 212, 191, 0.3)';
+    Chart.defaults.plugins.tooltip.borderColor = 'rgba(168, 85, 247, 0.35)';
     Chart.defaults.plugins.tooltip.borderWidth = 1;
     Chart.defaults.plugins.tooltip.padding = 12;
-    Chart.defaults.plugins.tooltip.cornerRadius = 8;
+    Chart.defaults.plugins.tooltip.cornerRadius = 10;
   }
 
   /**
    * Chart 1: Global & Regional Violence Prevalence (The 1 in 3 Crisis)
-   * Visual breakdown of lifetime physical/sexual intimate partner violence vs. non-partner violence
+   * Visual breakdown of Intimate Partner Violence (Purple) vs. Non-Partner Sexual Violence (Teal)
    */
   function initViolenceChart() {
     const ctx = document.getElementById('chart-violence-canvas');
@@ -80,19 +81,19 @@ const ChartsApp = (function () {
         labels: labels,
         datasets: [
           {
-            label: 'Intimate Partner Violence (%)',
+            label: 'Intimate Partner Violence (Purple Ribbon: Domestic Healing)',
             data: ipvRates,
-            backgroundColor: PALETTE.coralUrgent,
-            hoverBackgroundColor: '#ff6b6b',
-            borderRadius: 5,
+            backgroundColor: PALETTE.purpleVibrant,
+            hoverBackgroundColor: '#c084fc',
+            borderRadius: 6,
             borderSkipped: false
           },
           {
-            label: 'Non-Partner Sexual Violence (%)',
+            label: 'Non-Partner Sexual Violence (Teal Ribbon: Survivor Parity)',
             data: nonPartnerRates,
-            backgroundColor: PALETTE.violetVibrant,
-            hoverBackgroundColor: '#c084fc',
-            borderRadius: 5,
+            backgroundColor: PALETTE.tealVibrant,
+            hoverBackgroundColor: '#5eead4',
+            borderRadius: 6,
             borderSkipped: false
           }
         ]
@@ -109,7 +110,7 @@ const ChartsApp = (function () {
               color: PALETTE.textLight,
               usePointStyle: true,
               pointStyle: 'circle',
-              padding: 12
+              padding: 14
             }
           },
           tooltip: {
@@ -140,7 +141,7 @@ const ChartsApp = (function () {
             grid: { display: false },
             ticks: {
               color: PALETTE.textLight,
-              font: { weight: '500' }
+              font: { weight: '600' }
             }
           }
         }
@@ -174,7 +175,7 @@ const ChartsApp = (function () {
         labels: labels,
         datasets: [
           {
-            label: 'Gender Pay Gap (%)',
+            label: 'Gender Wage Gap (%)',
             data: payGaps,
             backgroundColor: PALETTE.coralUrgent,
             borderRadius: 6
@@ -188,7 +189,7 @@ const ChartsApp = (function () {
           {
             label: 'Parliamentary Seats Held (%)',
             data: parliament,
-            backgroundColor: PALETTE.violetVibrant,
+            backgroundColor: PALETTE.purpleVibrant,
             borderRadius: 6
           }
         ]
@@ -255,15 +256,16 @@ const ChartsApp = (function () {
         labels: labels,
         datasets: [
           {
-            label: 'Women Feeling Safe Alone at Night (%)',
+            label: 'Women Feeling Safe Alone at Night (Survivor Teal)',
             data: femaleSafe,
-            backgroundColor: PALETTE.coralUrgent,
+            backgroundColor: PALETTE.tealVibrant,
             borderRadius: 6
           },
           {
-            label: 'Men Feeling Safe Alone at Night (%)',
+            label: 'Men Feeling Safe Alone at Night (Twilight Purple)',
             data: maleSafe,
-            backgroundColor: 'rgba(255, 255, 255, 0.35)',
+            backgroundColor: 'rgba(168, 85, 247, 0.45)',
+            hoverBackgroundColor: 'rgba(192, 132, 252, 0.7)',
             borderRadius: 6
           }
         ]
@@ -336,24 +338,28 @@ const ChartsApp = (function () {
         labels: labels,
         datasets: [
           {
-            label: 'Women, Business & Law Score (0-100)',
+            label: 'Women, Business & Law Score (Survivor Teal)',
             data: lawScores,
             borderColor: PALETTE.tealVibrant,
-            backgroundColor: 'rgba(45, 212, 191, 0.1)',
+            backgroundColor: 'rgba(45, 212, 191, 0.12)',
             fill: true,
-            tension: 0.3,
-            pointRadius: 5,
-            pointBackgroundColor: PALETTE.tealVibrant
+            tension: 0.35,
+            pointRadius: 6,
+            pointHoverRadius: 9,
+            pointBackgroundColor: PALETTE.tealVibrant,
+            borderWidth: 2.5
           },
           {
-            label: 'Women Night Walking Safety Perception (%)',
+            label: 'Night Walking Safety Perception (Hydrangea Purple)',
             data: safetyScores,
-            borderColor: PALETTE.coralUrgent,
-            backgroundColor: 'rgba(255, 75, 75, 0.1)',
+            borderColor: PALETTE.purpleVibrant,
+            backgroundColor: 'rgba(168, 85, 247, 0.12)',
             fill: true,
-            tension: 0.3,
-            pointRadius: 5,
-            pointBackgroundColor: PALETTE.coralUrgent
+            tension: 0.35,
+            pointRadius: 6,
+            pointHoverRadius: 9,
+            pointBackgroundColor: PALETTE.purpleVibrant,
+            borderWidth: 2.5
           }
         ]
       },
@@ -366,13 +372,14 @@ const ChartsApp = (function () {
             labels: {
               color: PALETTE.textLight,
               usePointStyle: true,
-              pointStyle: 'circle'
+              pointStyle: 'circle',
+              padding: 14
             }
           },
           tooltip: {
             callbacks: {
               afterBody: function () {
-                return "The Legal-Reality Gap: Strong laws on paper do not immediately translate to physical safety on streets.";
+                return "The Legal-Reality Gap: Strong statutory protections on paper do not automatically guarantee safety in public spaces.";
               }
             }
           }
@@ -422,37 +429,37 @@ const ChartsApp = (function () {
         labels: years.map(y => y.toString()),
         datasets: [
           {
-            label: 'Legal Protection Index (0-100)',
+            label: 'Legal Protection Score (0-100) — Survivor Teal',
             data: legal,
             borderColor: PALETTE.tealVibrant,
             backgroundColor: 'transparent',
             borderWidth: 3,
             tension: 0.25,
             pointRadius: 6,
-            pointHoverRadius: 9,
+            pointHoverRadius: 10,
             pointBackgroundColor: PALETTE.tealVibrant
           },
           {
-            label: 'Women in Parliaments (%)',
+            label: 'Women in Parliaments (%) — Hydrangea Purple',
             data: parliament,
-            borderColor: PALETTE.violetVibrant,
+            borderColor: PALETTE.purpleVibrant,
             backgroundColor: 'transparent',
             borderWidth: 3,
             tension: 0.25,
             pointRadius: 6,
-            pointHoverRadius: 9,
-            pointBackgroundColor: PALETTE.violetVibrant
+            pointHoverRadius: 10,
+            pointBackgroundColor: PALETTE.purpleVibrant
           },
           {
-            label: 'Global Gender Pay Gap (%)',
+            label: 'Global Gender Pay Gap (%) — Coral Alert',
             data: payGap,
             borderColor: PALETTE.coralUrgent,
             backgroundColor: 'transparent',
-            borderWidth: 3,
+            borderWidth: 2.5,
             borderDash: [5, 5],
             tension: 0.25,
             pointRadius: 6,
-            pointHoverRadius: 9,
+            pointHoverRadius: 10,
             pointBackgroundColor: PALETTE.coralUrgent
           }
         ]
@@ -467,7 +474,7 @@ const ChartsApp = (function () {
               color: PALETTE.textLight,
               usePointStyle: true,
               pointStyle: 'circle',
-              padding: 14
+              padding: 16
             }
           },
           tooltip: {
@@ -493,15 +500,14 @@ const ChartsApp = (function () {
       }
     });
 
-    // Wire up slider interactivity
     if (slider) {
       const yearValues = [2004, 2009, 2014, 2019, 2024];
       const milestoneNotes = {
-        2004: "2004 Baseline: Women held under 16% of global parliamentary seats; few comprehensive legal protections against domestic coercive control.",
-        2009: "2009 Progress: MDG 3 advanced primary school education parity, but economic wage disparities remained entrenched at 24.2%.",
-        2014: "2014 Agenda Prep: Global consensus identified unpaid care burdens and systemic street harassment as urgent development blockers.",
-        2019: "2019 Accelerations: The #MeToo and Ni Una Menos movements triggered legislative overhauls and sexual violence reforms in 40+ countries.",
-        2024: "2024 Current Telemetry: Legal protections have climbed to 77.9/100, but evening public safety and equal pay require intensified male allyship."
+        2004: "2004 Baseline: Women held under 16% of global parliamentary seats; widespread absence of statutory protections against domestic coercive control.",
+        2009: "2009 Progress: MDG 3 advanced primary school parity, but structural wage disparities remained entrenched at 24.2%.",
+        2014: "2014 Agenda Prep: Global consensus identified unpaid care burdens and public harassment as systemic barriers to parity.",
+        2019: "2019 Acceleration: The #MeToo and Ni Una Menos movements triggered legislative overhauls and sexual violence reforms in 40+ countries.",
+        2024: "2024 Current Telemetry: Legal protections have reached 77.9/100, but public night safety and equal pay require intensified active allyship."
       };
 
       slider.addEventListener('input', (e) => {
@@ -511,16 +517,15 @@ const ChartsApp = (function () {
         if (yearDisplay) yearDisplay.textContent = selectedYear;
         if (noteDisplay) noteDisplay.textContent = milestoneNotes[selectedYear];
 
-        // Highlight selected point on the timeline chart
         if (timelineChartInstance) {
           timelineChartInstance.data.datasets.forEach(dataset => {
-            dataset.pointRadius = dataset.data.map((_, i) => (i === step ? 10 : 5));
+            dataset.pointRadius = dataset.data.map((_, i) => (i === step ? 11 : 5));
           });
           timelineChartInstance.update();
         }
 
         if (window.SoundFX) {
-          window.SoundFX.playTealChime(350 + step * 60);
+          window.SoundFX.playTealChime(360 + step * 60);
         }
       });
     }
@@ -536,7 +541,7 @@ const ChartsApp = (function () {
     const countries = window.DataService.getPayGapComparison();
 
     select.innerHTML = '';
-    countries.forEach((c, idx) => {
+    countries.forEach((c) => {
       const opt = document.createElement('option');
       opt.value = c.code;
       opt.textContent = `${c.country} (${c.code})`;
